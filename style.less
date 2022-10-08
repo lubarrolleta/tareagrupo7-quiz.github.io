@@ -1,24 +1,67 @@
 .quiz {
-  .welcomescreen {
-    .formUser {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      #nameUser {
-        font-size: 25px;
-      }
-    }
-    .quiz__btn__showRanking{
-        transition: all 0.5s ease;
-        &.show{
-            opacity: 1;
-            display: block;
+    .welcomescreen {
+        .formUser {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            #nameUser {
+                font-size: 25px;
+            }
         }
-        &.hidden{
-            opacity: 0;
-            display:none;
+
+        .quiz__btn__showRanking {
+            transition: all 0.5s ease;
+
+            &.show {
+                opacity: 1;
+                display: block;
+            }
+
+            &.hidden {
+                opacity: 0;
+                display: none;
+            }
         }
     }
-  }
- 
+
+    #respuestasUsers {
+        box-sizing: border-box;
+        padding: 10px;
+        width: 100%;
+        articles.card {
+            background-color: white;
+            border-radius: 9px;
+            padding: 10px;
+
+            .title,
+            .responseUser {
+                border-bottom: 1px solid rgb(109, 31, 161);
+                margin-bottom: 10px;
+            }
+            .anwserTitle{
+                span{
+                    padding:5px 0px 5px 5px;
+                    background-color: #eecb6e;
+                    border-radius:8px;
+                }
+            }
+            h2.title {
+                text-transform: uppercase;
+                color: red;
+                margin: auto;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        &.show {
+            margin:0 auto;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+    }
 }

@@ -21,7 +21,7 @@
             <p class="quiz__description">Este Quiz tiene <span class="numberOfQuestions">Y</span> preguntas</p>
             <form class="formUser">
 
-                <input type="text" id="nameUser" name="user" required autocomplete="off">
+                <input type="text" id="nameUser" name="user" required placeholder="username" autocomplete="off">
                 <button id="welcome_btn" class="quiz__btn" type="submit">Ok</button>
             </form>
             <button class="quiz__btn__showRanking" type="button">show Ranking</button>
@@ -39,7 +39,6 @@
         </div>
 
         <div id="respuestasUsers" class="hidden">
-            <h1>hola</h1>
         </div>
 
         <div id="resultscreen" class="resultscreen">
@@ -47,7 +46,7 @@
             <p class="quiz__description"><span id="correctAnswers">X</span> correctas de <span class="numberOfQuestions">Y</span></p>
         </div>
     </main>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 
 </html>

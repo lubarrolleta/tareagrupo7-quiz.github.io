@@ -1,19 +1,79 @@
+/* line 3, style.less */
 .quiz .welcomescreen .formUser {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+/* line 8, style.less */
 .quiz .welcomescreen .formUser #nameUser {
   font-size: 25px;
 }
+/* line 13, style.less */
 .quiz .welcomescreen .quiz__btn__showRanking {
+  -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+/* line 16, style.less */
 .quiz .welcomescreen .quiz__btn__showRanking.show {
   opacity: 1;
   display: block;
 }
+/* line 21, style.less */
 .quiz .welcomescreen .quiz__btn__showRanking.hidden {
   opacity: 0;
   display: none;
 }
+/* line 28, style.less */
+.quiz #respuestasUsers {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+}
+/* line 32, style.less */
+.quiz #respuestasUsers articles.card {
+  background-color: white;
+  border-radius: 9px;
+  padding: 10px;
+}
+/* line 37, style.less */
+.quiz #respuestasUsers articles.card .title,
+.quiz #respuestasUsers articles.card .responseUser {
+  border-bottom: 1px solid #6d1fa1;
+  margin-bottom: 10px;
+}
+/* line 43, style.less */
+.quiz #respuestasUsers articles.card .anwserTitle span {
+  padding: 5px 0px 5px 5px;
+  background-color: #eecb6e;
+  border-radius: 8px;
+}
+/* line 49, style.less */
+.quiz #respuestasUsers articles.card h2.title {
+  text-transform: uppercase;
+  color: red;
+  margin: auto;
+}
+/* line 55, style.less */
+.quiz #respuestasUsers articles.card:last-child {
+  border-bottom: none;
+}
+/* line 60, style.less */
+.quiz #respuestasUsers.show {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+/*# sourceMappingURL=style.css.map */

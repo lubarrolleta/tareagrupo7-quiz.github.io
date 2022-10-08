@@ -1,11 +1,15 @@
 let elQuestionScreen = document.getElementById("questionscreen");
 let elScreenResult = document.getElementById("resultscreen");
+// const data = require("./data");
+import { data } from '/data.js'
+console.log(data);
 // funciones
 const variables = {
     newuser: null,
     prevRanking: [],
     userNamePrev: null,
     setUser: new GetUsers(),
+    quiz: new Quiz(),
     form: {
         selectForm: document.querySelector(".formUser"),
         input: document.querySelector("#nameUser"),
@@ -14,11 +18,13 @@ const variables = {
         selectBtn: document.querySelector("#welcome_btn"),
     },
     showRanking: document.querySelector(".quiz__btn__showRanking"),
+    sectionRanking: document.querySelector('#respuestasUsers'),
     elWelcomeScr: document.getElementById("welcomescreen"),
     questions: []
 };
 const inicio = {
     init: function() {
+        inicio.addQuestions()
         variables.form.selectForm.addEventListener(
             "submit",
             inicio.validaForm,
@@ -31,6 +37,12 @@ const inicio = {
 
     },
     showInit: function() {
+        variables.newuser = null
+        variables.prevRanking = []
+        variables.sectionRanking.textContent = "";
+
+        // quiz.counter = 0;
+        // quiz.indexCurrentQuestion = 0;
         if (variables.setUser.users.length === 0) {
 
             variables.showRanking.classList.add("hidden")
@@ -61,8 +73,10 @@ const inicio = {
 
                 elQuestionScreen.style.display = "block";
 
-                quiz.showCurrentQuestion();
+                variables.quiz.showCurrentQuestion();
                 variables.form.input.value = ''
+                variables.sectionRanking.textContent = "";
+
 
             }, 1000);
         }
@@ -71,6 +85,37 @@ const inicio = {
 
         console.log(action);
         console.log(variables.setUser.users);
+        if (action === 'show') {
+            // variables.showRanking
+            variables.showRanking.classList.remove('show')
+            variables.showRanking.classList.add('hidden')
+
+            variables.sectionRanking.classList.replace("hidden", 'show');
+
+
+            variables.setUser.users.map((user) => {
+                const card = document.createElement('articles');
+                card.classList.add('card')
+                const title = document.createElement('h2')
+                title.classList.add('title')
+                title.textContent = user.name
+                card.appendChild(title)
+                user.answers.map((answer, i) => {
+                    const anwserTitle = document.createElement('h3')
+                    anwserTitle.classList.add('anwserTitle')
+                    const responseUser = document.createElement('h4')
+                    responseUser.classList.add('responseUser')
+
+                    anwserTitle.innerHTML = `<span class='span'>Question ${i+1} : </span> ${answer.titleAnswers}`
+                    card.append(anwserTitle)
+                    responseUser.textContent = 'Response: ' + answer.Answer
+                    card.append(responseUser)
+                })
+                variables.sectionRanking.appendChild(card)
+
+            })
+
+        }
         // variables.newuser.users.length === 0 &&
         //     variables.showRanking.classList.add("show");
         // let elWelcomeScr = document.getElementById("welcomescreen");
@@ -81,6 +126,13 @@ const inicio = {
 
         // quiz.showCurrentQuestion();
     },
+    addQuestions: function() {
+        data.forEach((answer) => {
+            console.log(answer);
+            const question = new Question(answer.title, answer.answers, answer.correctAnswer)
+            variables.quiz.addQuestion(question)
+        })
+    }
 };
 inicio.init();
 
@@ -106,35 +158,37 @@ function Quiz() {
         this.questions.push(question);
     };
     this.showCurrentQuestion = function() {
-        if (this.indexCurrentQuestion < this.questions.length) {
-            this.questions[this.indexCurrentQuestion].getElement();
-        } else {
+        console.log(this.indexCurrentQuestion, this.questions.length)
+        if (this.indexCurrentQuestion === (this.questions.length)) {
+
             elQuestionScreen.classList.add("hidden");
 
             let elCorrectAnswers = document.querySelector("#correctAnswers");
-            elCorrectAnswers.innerHTML = quiz.counter;
+            elCorrectAnswers.innerHTML = variables.quiz.counter;
 
             // elScreenResult.classList.add('block')
             elScreenResult.style.display = "block";
             // console.log(variables.prevRanking)
-            variables.newuser = new SetUser(variables.userNamePrev, variables.prevRanking, quiz.counter);
+            variables.newuser = new SetUser(variables.userNamePrev, variables.prevRanking, variables.quiz.counter);
             variables.setUser.addUsers(variables.newuser)
                 // console.log(variables.newuser)
-            variables.newuser = null
-            variables.prevRanking = []
-            quiz.counter = 0;
-            quiz.indexCurrentQuestion = 0;
+
             // console.log(variables.newuser)
             setTimeout(() => {
                 elScreenResult.style.display = "none";
                 variables.elWelcomeScr.classList.remove("hidden");
                 inicio.showInit()
 
+                variables.quiz.counter = 0;
+                variables.quiz.indexCurrentQuestion = 0;
+
+
             }, 1000)
+        } else {
 
-
-
+            this.questions[this.indexCurrentQuestion].getElement();
         }
+
     };
 }
 
@@ -159,7 +213,7 @@ function Question(title, answers, correctAnswer) {
     };
     this.getElement = function() {
         let questionNumber = document.createElement("h2");
-        questionNumber.textContent = `Pregunta ${(quiz.indexCurrentQuestion + 1)}/${quiz.questions.length}`;
+        questionNumber.textContent = `Pregunta ${(variables.quiz.indexCurrentQuestion + 1)}/${variables.quiz.questions.length}`;
         elQuestionScreen.append(questionNumber);
         let questionTitle = document.createElement("h3");
         questionTitle.textContent = this.title;
@@ -184,7 +238,7 @@ function Question(title, answers, correctAnswer) {
         let anwserSelected = event.target;
         if (this.isCorrectAnswer(anwserSelected.id)) {
             anwserSelected.classList.add("answer--correct");
-            quiz.counter++;
+            variables.quiz.counter++;
         } else {
             anwserSelected.classList.add("answer--wrong");
             let elCorrectAnswer = document.getElementById(this.correctAnswer);
@@ -193,46 +247,34 @@ function Question(title, answers, correctAnswer) {
 
         setTimeout(() => {
             elQuestionScreen.textContent = "";
-            quiz.indexCurrentQuestion++;
-            quiz.showCurrentQuestion();
+            console.log('conteo beefor ', variables.quiz.indexCurrentQuestion);
+
+            variables.quiz.indexCurrentQuestion += 1;
+            console.log('conteo after ', variables.quiz.indexCurrentQuestion);
+            variables.quiz.showCurrentQuestion();
             let prevDataUser = {
                 titleAnswers: title,
-                Answer: parseInt(anwserSelected.id),
+                AnswerId: parseInt(anwserSelected.id),
+                Answer: anwserSelected.textContent,
                 correctAnswer: this.correctAnswer,
                 isCorrect: parseInt(anwserSelected.id) === this.correctAnswer ? true : false,
                 // counter: this.counter
             }
             variables.prevRanking.push(prevDataUser)
-                // console.log('VARIABLES', variables.prevRanking);
+            console.log('VARIABLES', variables.prevRanking);
         }, 1000);
     };
 }
 
-let question1 = new Question(
-    "What is the only thing that computers understand?", ["Machine Code", "High Level Languages", "Low Level Languages", "Algorithms"],
-    1
-);
-let question2 = new Question(
-    "A list of instructions that enable a computer to perform a specific task is a...", ["Computer Program", "Machine Code", "Algorithm", "Binary Code"],
-    3
-);
-let question3 = new Question(
-    "Before a computer can understand a program it must be...", [
-        "Translated into its machine code",
-        "Translated into a low level language",
-        "Translated into a high level language",
-    ],
-    1
-);
-let question4 = new Question("Pregunta 4", ["op1", "op2"], 1);
 
-let quiz = new Quiz();
-quiz.addQuestion(question1);
-quiz.addQuestion(question2);
-quiz.addQuestion(question3);
-quiz.addQuestion(question4);
+
+// let quiz = new Quiz();
+// quiz.addQuestion(question1);
+// quiz.addQuestion(question2);
+// quiz.addQuestion(question3);
+// quiz.addQuestion(question4);
 // quiz.launch()
-console.log(quiz.questions)
+console.log(variables.quiz.questions)
 let users = new GetUsers();
 // console.log(users);
 
@@ -249,7 +291,7 @@ let elNumberOfQuestions = document.querySelectorAll(".numberOfQuestions");
 // }
 
 elNumberOfQuestions.forEach(function(elnumberofquestions) {
-    elnumberofquestions.textContent = quiz.questions.length;
+    elnumberofquestions.textContent = variables.quiz.questions.length;
 });
 
 function seeFirstQuestion() {
