@@ -101,7 +101,7 @@ const inicio = {
                 card.classList.add('card')
                 const title = document.createElement('h2')
                 title.classList.add('title')
-                title.textContent = user.name
+                title.innerHTML = `${user.name} <span class='counter'>${user.counter}</span>`
                 card.appendChild(title)
                 user.answers.map((answer, i) => {
                     const anwserTitle = document.createElement('h3')

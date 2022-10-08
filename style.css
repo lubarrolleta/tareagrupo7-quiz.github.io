@@ -58,14 +58,26 @@
 /* line 49, style.less */
 .quiz #respuestasUsers articles.card h2.title {
   text-transform: uppercase;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   color: red;
-  margin: auto;
+  margin: 5px;
+  padding: 10px;
 }
 /* line 55, style.less */
+.quiz #respuestasUsers articles.card h2.title span {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px;
+  background-color: #77de6f;
+  border-radius: 8px;
+  color: white;
+}
+/* line 65, style.less */
 .quiz #respuestasUsers articles.card:last-child {
   border-bottom: none;
 }
-/* line 60, style.less */
+/* line 70, style.less */
 .quiz #respuestasUsers.show {
   margin: 0 auto;
   display: -webkit-box;
