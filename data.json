@@ -1,5 +1,5 @@
 [{
-        "title": "Before a computer can understand a program it must be...",
+        "title": "¿Qué te impulsó a navegar y comprar en nuestra ecommerce?",
         "answers": [
             "Translated into its machine code",
             "Translated into a low level language",
@@ -21,5 +21,15 @@
             "Algorithms"
         ],
         "correctAnswer": 1
+    },
+    {
+        "title": "¿Cómo conociste nuestra Tienda?",
+        "answers": [
+            "A través de un amigo",
+            "Anuncio en la TV",
+            "En la radio",
+            "Por las RRSS"
+        ],
+        "correctAnswer": "2"
     }
 ]
