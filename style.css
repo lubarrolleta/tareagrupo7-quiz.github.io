@@ -1,0 +1,19 @@
+.quiz .welcomescreen .formUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quiz .welcomescreen .formUser #nameUser {
+  font-size: 25px;
+}
+.quiz .welcomescreen .quiz__btn__showRanking {
+  transition: all 0.5s ease;
+}
+.quiz .welcomescreen .quiz__btn__showRanking.show {
+  opacity: 1;
+  display: block;
+}
+.quiz .welcomescreen .quiz__btn__showRanking.hidden {
+  opacity: 0;
+  display: none;
+}

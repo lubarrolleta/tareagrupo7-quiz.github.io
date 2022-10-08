@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz OOP DOM</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <main class="quiz">
         <div id="welcomescreen" class="welcomescreen">
             <h1 class="quiz__maintitle">Bienvenido a este Quiz</h1>
             <p class="quiz__description">Este Quiz tiene <span class="numberOfQuestions">Y</span> preguntas</p>
-            <button id="welcome_btn" class="quiz__btn">Ok</button>
+            <form class="formUser">
+
+                <input type="text" id="nameUser" name="user" required autocomplete="off">
+                <button id="welcome_btn" class="quiz__btn" type="submit">Ok</button>
+            </form>
+            <button class="quiz__btn__showRanking" type="button">show Ranking</button>
+
         </div>
 
         <div id="questionscreen" class="questionscreen">
@@ -28,12 +38,16 @@
             </ul> -->
         </div>
 
+        <div id="respuestasUsers" class="hidden">
+            <h1>hola</h1>
+        </div>
+
         <div id="resultscreen" class="resultscreen">
             <h2 class="quiz__subtitle">Resultados</h2>
-            <p class="quiz__description"><span id="correctAnswers">X</span>
-                 correctas de <span class="numberOfQuestions">Y</span></p>
+            <p class="quiz__description"><span id="correctAnswers">X</span> correctas de <span class="numberOfQuestions">Y</span></p>
         </div>
     </main>
     <script src="app.js"></script>
 </body>
+
 </html>
