@@ -6,6 +6,7 @@ export const data = [{
             "Translated into a high level language",
         ],
         correctAnswer: 1,
+        conditions: 2
     },
     {
         title: "A list of instructions that enable a computer to perform a specific task is a...",
