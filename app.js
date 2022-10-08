@@ -1,8 +1,11 @@
 let elQuestionScreen = document.getElementById("questionscreen");
 let elScreenResult = document.getElementById("resultscreen");
 // const data = require("./data");
-import { data } from '/data.js'
-console.log(data);
+import { data } from './tareagrupo7-quiz/data.js'
+// import {} from './data.json';
+// console.log(datos);
+console.log(JSON.stringify(data));
+
 // funciones
 const variables = {
     newuser: null,
