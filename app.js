@@ -15,6 +15,7 @@ const variables = {
     quiz: null,
     isCondition: false,
     currentQuestion: 0,
+    currentPrev: null,
     main: document.querySelector('main.quiz'),
     titles: {
         pregunta: 'preguntas',
@@ -235,15 +236,14 @@ const inicio = {
         //     })
 
         // }
-        result.append(inicio.resultUsers(user, result))
-            // const botonShowMoreResults = document.createElement('button')
-            // botonShowMoreResults.textContent = 'show more results'
-            // console.log(variables.setUser.users.length)
-            // const botonShowInit = document.createElement('button')
-            // botonShowInit.textContent = 'inicio'
-            //     // const botonGoInit = document.createElement('button')
-            // variables.botonShowInit = botonShowInit
-            // variables.botonShowMoreResults = botonShowMoreResults
+        // const botonShowMoreResults = document.createElement('button')
+        // botonShowMoreResults.textContent = 'show more results'
+        // console.log(variables.setUser.users.length)
+        // const botonShowInit = document.createElement('button')
+        // botonShowInit.textContent = 'inicio'
+        //     // const botonGoInit = document.createElement('button')
+        // variables.botonShowInit = botonShowInit
+        // variables.botonShowMoreResults = botonShowMoreResults
         const botonShow = document.createElement('button')
         botonShow.textContent = 'ver mas resultados'
         botonShow.classList.add('btn')
@@ -252,6 +252,7 @@ const inicio = {
         console.log(variables.btn.botonShowMoreResults, variables.setUser.users.length);
         variables.setUser.users.length > 1 ? result.append(botonShow) : result.append(variables.btn.botonShowInit)
         result.append(variables.btn.botonShowMoreResults)
+        result.append(inicio.resultUsers(user, result))
         return result
 
     },
@@ -309,11 +310,11 @@ const inicio = {
             variables.encuesta.textContent = ''
             variables.encuesta.classList.replace('show', 'hidden')
             variables.elWelcomeScr.classList.replace('show', 'hidden')
+            variables.sectionResultadosUser.appendChild(variables.btn.botonShowInit)
             variables.setUser.users.reverse().forEach((user) => {
 
                 variables.sectionResultadosUser.append(inicio.resultUsers(user, null))
             })
-            variables.sectionResultadosUser.appendChild(variables.btn.botonShowInit)
         }
         // variables.newuser.users.length === 0 &&
         //     variables.showRanking.classList.add("show");
@@ -355,9 +356,13 @@ const inicio = {
                 console.log('VARIABLES', variables.prevRanking);
                 if (variables.quiz.questions[variables.currentQuestion].correctAnswer && variables.quiz.questions[variables.currentQuestion].correctAnswer.includes(parseInt(event.target.id))) {
                     console.log('si');
-                    // console.log(variables.quiz.questions[variables.currentQuestion].conditions)
+                    variables.currentPrev = variables.currentQuestion
+                    console.log('variables.currentQuestion👉👉', variables.currentPrev)
+                        // console.log(variables.quiz.questions[variables.currentQuestion].conditions)
                     variables.currentQuestion = variables.quiz.questions[variables.currentQuestion].conditions
                     variables.quiz.questions[variables.currentQuestion].conditions = true
+                    variables.quiz.questions[variables.currentQuestion].correctAnswer = 'CON'
+
                     console.log(variables.currentQuestion);
                     inicio.renderEncuesta()
                 } else {
@@ -404,6 +409,12 @@ const inicio = {
                 variables.currentQuestion++
                     inicio.renderEncuesta()
 
+            } else if (variables.quiz.questions[variables.currentQuestion].correctAnswer === 'CON') {
+                console.log('ENTRE A LA CONDICIONAL');
+                variables.quiz.questions[variables.currentQuestion].conditions = null
+                variables.quiz.questions[variables.currentQuestion].correctAnswer = null
+                console.log(variables.quiz.questions[variables.currentQuestion].conditions, 'ES')
+                variables.currentQuestion = variables.currentPrev
             }
         } else {
             console.log('final', variables.prevRanking);
@@ -605,21 +616,8 @@ function Question(title, answers, correctAnswer, conditions) {
 
 
 
-// let quiz = new Quiz();
-// quiz.addQuestion(question1);
-// quiz.addQuestion(question2);
-// quiz.addQuestion(question3);
-// quiz.addQuestion(question4);
-// quiz.launch()
-console.log(variables.quiz.questions)
-let users = new GetUsers();
-// console.log(users);
 
-// // let elCorrectAnswers = document.getElementById("correctAnswers")
-// let elCorrectAnswers = document.querySelector("#correctAnswers")
-// // console.log(elCorrectAnswers)
-// // elCorrectAnswers.textContent = quiz.counter
-// elCorrectAnswers.innerHTML = quiz.counter
+
 
 // let elNumberOfQuestions = document.getElementsByClassName("numberOfQuestions")
 let elNumberOfQuestions = document.querySelectorAll(".numberOfQuestions");
@@ -630,16 +628,3 @@ let elNumberOfQuestions = document.querySelectorAll(".numberOfQuestions");
 elNumberOfQuestions.forEach(function(elnumberofquestions) {
     elnumberofquestions.textContent = variables.quiz.questions.length;
 });
-
-function seeFirstQuestion() {
-    let elWelcomeScr = document.getElementById("welcomescreen");
-    // elWelcomeScr.style.display = 'none'
-    elWelcomeScr.classList.add("hidden");
-
-    elQuestionScreen.style.display = "block";
-
-    quiz.showCurrentQuestion();
-}
-
-let elWelcomeBtn = document.getElementById("welcome_btn");
-// elWelcomeBtn.addEventListener("click", seeFirstQuestion)
