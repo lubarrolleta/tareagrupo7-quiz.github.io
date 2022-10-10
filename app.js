@@ -16,11 +16,19 @@ const variables = {
     isCondition: false,
     currentQuestion: 0,
     main: document.querySelector('main.quiz'),
+    titles: {
+        pregunta: 'preguntas',
+        respuestas: 'respuestas',
+        titleEncuesta: 'encuesta de atencion al cliente',
+        subTitle: `son ${this?.quiz.questions.length}`
+    },
     form: {
         selectForm: null,
         input: null,
     },
     btn: {
+        botonShowMoreResults: null,
+        botonShowInit: null,
         selectBtn: null,
     },
     sectionResultadosUser: null,
@@ -42,8 +50,9 @@ const inicio = {
             false
         );
         // variables.btn.selectBtn.addEventListener("click", inicio.validaForm, false);
-        variables.showRanking.addEventListener("click", () => inicio.clickBtn('show'), false);
-
+        // variables.showRanking.addEventListener("click", () => inicio.clickBtn('show'), false);
+        variables.btn.botonShowMoreResults.addEventListener('click', () => { inicio.clickBtn('more') }, false)
+        variables.btn.botonShowInit.addEventListener('click', () => inicio.clickBtn('inicio'), false)
         inicio.showInit()
 
     },
@@ -54,15 +63,17 @@ const inicio = {
         variables.currentQuestion = 0
         variables.quiz = null
         inicio.addQuestions()
-            // quiz.counter = 0;
-            // quiz.indexCurrentQuestion = 0;
+        variables.setUser.users.length !== 0 && variables.elWelcomeScr.appendChild(variables.btn.botonShowMoreResults)
+
+        // quiz.counter = 0;
+        // quiz.indexCurrentQuestion = 0;
         if (variables.setUser.users.length === 0) {
 
-            variables.showRanking.classList.add("hidden")
+            // variables.showRanking.classList.add("hidden")
         } else {
-            variables.showRanking.classList.remove("hidden")
+            // variables.showRanking.classList.remove("hidden")
 
-            variables.showRanking.classList.add("show");
+            // variables.showRanking.classList.add("show");
         }
     },
     validaForm: function(e) {
@@ -82,8 +93,8 @@ const inicio = {
                 // console.log(variables.newuser.users);
 
                 // elWelcomeScr.style.display = 'none'
-                variables.elWelcomeScr.classList.add('hidden');
-
+                variables.elWelcomeScr.classList.replace('show', 'hidden');
+                // variables.elWelcomeScr.textContent = ''
                 // elQuestionScreen.style.display = "block";
 
                 // variables.quiz.showCurrentQuestion();
@@ -100,6 +111,7 @@ const inicio = {
             const { answers, name, idUsers } = user
 
             const cardUser = document.createElement('article')
+            cardUser.classList.add('cardUser')
             const nameTitles = document.createElement('h3')
             nameTitles.textContent = name
             cardUser.append(nameTitles)
@@ -108,10 +120,12 @@ const inicio = {
                     const answers = document.createElement('section')
                     answers.classList.add('answers')
                     const titleAnswers = document.createElement('h4')
-                    titleAnswers.textContent = answer.titleAnswers
+                    titleAnswers.innerHTML = `<span class='pregunta'>${variables.titles.pregunta}: </span>${answer.titleAnswers}`
                     answers.append(titleAnswers)
                     const responseUser = document.createElement('h4')
                     responseUser.textContent = answer.Answer
+                    responseUser.innerHTML = `<span class='respuestas'>${variables.titles.respuestas}: </span>${answer.Answer}`
+
                     answers.append(responseUser)
 
                     cardUser.append(answers)
@@ -124,12 +138,23 @@ const inicio = {
     renderInit: function() {
         console.log(variables.main);
         const welcomeScreen = document.createElement('section')
-        welcomeScreen.classList.add('welcomeScreen')
+        welcomeScreen.setAttribute('class', 'welcomeScreen show')
         variables.elWelcomeScr = welcomeScreen
         const encuesta = document.createElement('section')
         encuesta.classList.add('encuesta')
         encuesta.classList.add('hidden')
         variables.encuesta = encuesta
+            // creacion title de formulario 
+        const titleEncuesta = document.createElement('h1')
+        titleEncuesta.innerHTML = `${variables.titles.titleEncuesta}`
+        welcomeScreen.appendChild(titleEncuesta)
+            // creacion del suntitle
+        const subTitle = document.createElement('h2')
+        variables.titles.subTitle = `son ${variables.quiz.questions.length} preguntas`
+        subTitle.textContent = variables.titles.subTitle
+        welcomeScreen.appendChild(subTitle)
+            // 
+            // 
         const form = document.createElement('form')
         variables.form.selectForm = form
         form.classList.add('formUser')
@@ -137,7 +162,20 @@ const inicio = {
         const sectionResultadosUser = document.createElement('section')
         sectionResultadosUser.setAttribute('class', 'sectionResultadosUser hidden')
         variables.sectionResultadosUser = sectionResultadosUser
-            // creando el input
+            // 👉creando el boton de ver mas entradas
+        const botonShowMoreResults = document.createElement('button')
+        botonShowMoreResults.textContent = 'show more results'
+            // console.log(variables.setUser.users.length)
+        botonShowMoreResults.classList.add('btn')
+        const botonShowInit = document.createElement('button')
+        botonShowInit.textContent = 'inicio'
+        botonShowInit.classList.add('btn')
+
+        // const botonGoInit = document.createElement('button')
+        variables.btn.botonShowInit = botonShowInit
+        variables.btn.botonShowMoreResults = botonShowMoreResults
+
+        // creando el input
         const input = document.createElement('input')
         input.setAttribute('type', 'text')
         input.setAttribute('required', true)
@@ -198,14 +236,22 @@ const inicio = {
 
         // }
         result.append(inicio.resultUsers(user, result))
-        const botonShowMoreResults = document.createElement('button')
-        botonShowMoreResults.textContent = 'show more results'
-        console.log(variables.setUser.users.length)
-        const botonShowInit = document.createElement('button')
-        botonShowInit.textContent = 'inicio'
-        botonShowMoreResults.addEventListener('click', () => { inicio.clickBtn('more') }, false)
-        botonShowInit.addEventListener('click', () => inicio.clickBtn('inicio'), false)
-        variables.setUser.users.length !== 1 ? result.append(botonShowMoreResults) : result.append(botonShowInit)
+            // const botonShowMoreResults = document.createElement('button')
+            // botonShowMoreResults.textContent = 'show more results'
+            // console.log(variables.setUser.users.length)
+            // const botonShowInit = document.createElement('button')
+            // botonShowInit.textContent = 'inicio'
+            //     // const botonGoInit = document.createElement('button')
+            // variables.botonShowInit = botonShowInit
+            // variables.botonShowMoreResults = botonShowMoreResults
+        const botonShow = document.createElement('button')
+        botonShow.textContent = 'ver mas resultados'
+        botonShow.classList.add('btn')
+            // variables.btn.botonShowMoreResults = botonShow
+        botonShow.addEventListener('click', () => { inicio.clickBtn('more') }, false)
+        console.log(variables.btn.botonShowMoreResults, variables.setUser.users.length);
+        variables.setUser.users.length > 1 ? result.append(botonShow) : result.append(variables.btn.botonShowInit)
+        result.append(variables.btn.botonShowMoreResults)
         return result
 
     },
@@ -247,6 +293,9 @@ const inicio = {
             // variables.main.replaceChildren()
             variables.encuesta.classList.replace('show', 'hidden')
             variables.elWelcomeScr.classList.replace('hidden', 'show')
+                // inicio.renderInit()
+            variables.sectionResultadosUser.classList.replace('show', 'hidden')
+            variables.sectionResultadosUser.textContent = ''
                 // inicio.showInit()
                 // variables.quiz = null
                 // inicio.addQuestions()
@@ -254,13 +303,17 @@ const inicio = {
         } else if (action === 'more') {
             console.log('more')
             variables.sectionResultadosUser.classList.replace('hidden', 'show')
+            const title = document.createElement('h2')
+            title.textContent = 'all responses'
+            variables.sectionResultadosUser.appendChild(title)
             variables.encuesta.textContent = ''
             variables.encuesta.classList.replace('show', 'hidden')
-            variables.setUser.users.forEach((user) => {
+            variables.elWelcomeScr.classList.replace('show', 'hidden')
+            variables.setUser.users.reverse().forEach((user) => {
 
-                variables.sectionResultadosUser.appendChild(inicio.resultUsers(user, null))
+                variables.sectionResultadosUser.append(inicio.resultUsers(user, null))
             })
-            variables.sectionResultadosUser.appendChild()
+            variables.sectionResultadosUser.appendChild(variables.btn.botonShowInit)
         }
         // variables.newuser.users.length === 0 &&
         //     variables.showRanking.classList.add("show");
@@ -274,6 +327,7 @@ const inicio = {
     },
     addEncuesta: function() {
         const cardQuestion = document.createElement("div");
+        cardQuestion.classList.add('cardQuestion')
         const titleCardQuestion = document.createElement('h2');
         cardQuestion.appendChild(titleCardQuestion)
 
@@ -281,10 +335,12 @@ const inicio = {
         console.log(variables.currentQuestion);
         titleCardQuestion.textContent = variables.quiz.questions[variables.currentQuestion].title
         const lista = document.createElement('ul')
+        lista.classList.add('lista')
         variables.quiz.questions[variables.currentQuestion].answers.forEach((answer, i) => {
             const condition = document.createElement('li')
             condition.textContent = answer
             condition.id = i
+            condition.classList.add('item')
             condition.addEventListener('click', (event) => {
                 console.log(event.target)
                 let prevDataUser = {

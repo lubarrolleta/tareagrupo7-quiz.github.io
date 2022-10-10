@@ -1,5 +1,73 @@
+/* line 1, style.less */
+.quiz {
+  cursor: default;
+}
 /* line 3, style.less */
-.quiz .welcomescreen .formUser {
+.quiz button.btn {
+  background-color: #eecb6e;
+  color: #ffffff;
+  padding: 0.75rem 3rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+/* line 12, style.less */
+.quiz .hidden {
+  opacity: 0;
+  display: none;
+}
+/* line 16, style.less */
+.quiz .show {
+  opacity: 1;
+  display: block;
+}
+/* line 20, style.less */
+.quiz h2 {
+  text-transform: capitalize;
+}
+/* line 23, style.less */
+.quiz .cardUser {
+  background-color: white;
+  padding: 10px;
+  border-radius: 9px;
+  margin-bottom: 10px;
+}
+/* line 28, style.less */
+.quiz .cardUser h3 {
+  text-transform: capitalize;
+}
+/* line 31, style.less */
+.quiz .cardUser .answers {
+  border-top: 2px solid black;
+}
+/* line 33, style.less */
+.quiz .cardUser .answers h4 {
+  text-align: start;
+  padding: 5px 10px;
+}
+/* line 36, style.less */
+.quiz .cardUser .answers h4 span {
+  padding: 5px;
+  margin-right: 5px;
+  text-transform: capitalize;
+}
+/* line 40, style.less */
+.quiz .cardUser .answers h4 span.respuestas {
+  background-color: #5e4630;
+  color: white;
+}
+/* line 44, style.less */
+.quiz .cardUser .answers h4 span.pregunta {
+  background-color: #eecb6e;
+}
+/* line 52, style.less */
+.quiz section.welcomeScreen {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 54, style.less */
+.quiz section.welcomeScreen .formUser {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,61 +79,71 @@
       -ms-flex-align: center;
           align-items: center;
 }
-/* line 8, style.less */
-.quiz .welcomescreen .formUser #nameUser {
+/* line 59, style.less */
+.quiz section.welcomeScreen .formUser #nameUser {
   font-size: 25px;
 }
-/* line 12, style.less */
-.quiz .welcomescreen.hidden {
-  opacity: 0;
-  display: none;
-}
-/* line 16, style.less */
-.quiz .welcomescreen.show {
-  opacity: 1;
-  display: block;
-}
-/* line 20, style.less */
-.quiz .welcomescreen .quiz__btn__showRanking {
+/* line 71, style.less */
+.quiz section.welcomeScreen .quiz__btn__showRanking {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-/* line 23, style.less */
-.quiz .welcomescreen .quiz__btn__showRanking.show {
-  opacity: 1;
-  display: block;
+/* line 88, style.less */
+.quiz section.encuesta .cardQuestion .lista {
+  list-style: none;
+  background-color: white;
+  padding: 10px;
 }
-/* line 28, style.less */
-.quiz .welcomescreen .quiz__btn__showRanking.hidden {
-  opacity: 0;
-  display: none;
+/* line 93, style.less */
+.quiz section.encuesta .cardQuestion .lista .item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #5e4630;
 }
-/* line 35, style.less */
+/* line 97, style.less */
+.quiz section.encuesta .cardQuestion .lista .item:last-child {
+  border-bottom: none;
+}
+/* line 111, style.less */
+.quiz section.sectionResultadosUser .cardUser {
+  background-color: white;
+  padding: 10px;
+  border-radius: 9px;
+}
+/* line 115, style.less */
+.quiz section.sectionResultadosUser .cardUser h3 {
+  text-transform: capitalize;
+}
+/* line 118, style.less */
+.quiz section.sectionResultadosUser .cardUser .answers {
+  border-top: 2px solid black;
+}
+/* line 123, style.less */
 .quiz #respuestasUsers {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 10px;
   width: 100%;
 }
-/* line 39, style.less */
+/* line 127, style.less */
 .quiz #respuestasUsers articles.card {
   background-color: white;
   border-radius: 9px;
   padding: 10px;
 }
-/* line 44, style.less */
+/* line 132, style.less */
 .quiz #respuestasUsers articles.card .title,
 .quiz #respuestasUsers articles.card .responseUser {
   border-bottom: 1px solid #6d1fa1;
   margin-bottom: 10px;
 }
-/* line 50, style.less */
+/* line 138, style.less */
 .quiz #respuestasUsers articles.card .anwserTitle span {
   padding: 5px 0px 5px 5px;
   background-color: #eecb6e;
   border-radius: 8px;
 }
-/* line 56, style.less */
+/* line 144, style.less */
 .quiz #respuestasUsers articles.card h2.title {
   text-transform: uppercase;
   -webkit-box-sizing: border-box;
@@ -74,7 +152,7 @@
   margin: 5px;
   padding: 10px;
 }
-/* line 62, style.less */
+/* line 150, style.less */
 .quiz #respuestasUsers articles.card h2.title span {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -83,11 +161,11 @@
   border-radius: 8px;
   color: white;
 }
-/* line 72, style.less */
+/* line 160, style.less */
 .quiz #respuestasUsers articles.card:last-child {
   border-bottom: none;
 }
-/* line 77, style.less */
+/* line 165, style.less */
 .quiz #respuestasUsers.show {
   margin: 0 auto;
   display: -webkit-box;
