@@ -1,7 +1,8 @@
 let elQuestionScreen = document.getElementById("questionscreen");
 let elScreenResult = document.getElementById("resultscreen");
 // const data = require("./data");
-import { data } from './tareagrupo7-quiz/data.js'
+import { data } from "./tareagrupo7-quiz/data.js";
+// const questions = require("./questions.js");
 // import {} from './data.json';
 // console.log(datos);
 // console.log(JSON.stringify(data));
@@ -16,12 +17,12 @@ const variables = {
     isCondition: false,
     currentQuestion: 0,
     currentPrev: null,
-    main: document.querySelector('main.quiz'),
+    main: document.querySelector("main.quiz"),
     titles: {
-        pregunta: 'preguntas',
-        respuestas: 'respuestas',
-        titleEncuesta: 'encuesta de atencion al cliente',
-        subTitle: `son ${this?.quiz.questions.length}`
+        pregunta: "preguntas",
+        respuestas: "respuestas",
+        titleEncuesta: "encuesta de atencion al cliente",
+        subTitle: `son ${this?.quiz.questions.length}`,
     },
     form: {
         selectForm: null,
@@ -35,45 +36,53 @@ const variables = {
     sectionResultadosUser: null,
     encuesta: null,
     showRanking: document.querySelector(".quiz__btn__showRanking"),
-    sectionRanking: document.querySelector('#respuestasUsers'),
+    sectionRanking: document.querySelector("#respuestasUsers"),
     elWelcomeScr: null,
     QuestionScreen: document.getElementById("questionscreen"),
-    questions: []
+    questions: [],
 };
 const inicio = {
     init: function() {
-        inicio.addQuestions()
-        inicio.renderInit()
+        inicio.addQuestions();
+        inicio.renderInit();
         variables.form.selectForm.addEventListener(
             "submit",
-            (e) =>
-            inicio.validaForm(e),
+            (e) => inicio.validaForm(e),
             false
         );
+        console.log(questions, 'questions👊👊👊');
         // variables.btn.selectBtn.addEventListener("click", inicio.validaForm, false);
         // variables.showRanking.addEventListener("click", () => inicio.clickBtn('show'), false);
-        variables.btn.botonShowMoreResults.addEventListener('click', () => { inicio.clickBtn('more') }, false)
-        variables.btn.botonShowInit.addEventListener('click', () => inicio.clickBtn('inicio'), false)
-        inicio.showInit()
-
+        variables.btn.botonShowMoreResults.addEventListener(
+            "click",
+            () => {
+                inicio.clickBtn("more");
+            },
+            false
+        );
+        variables.btn.botonShowInit.addEventListener(
+            "click",
+            () => inicio.clickBtn("inicio"),
+            false
+        );
+        inicio.showInit();
     },
     showInit: function() {
-        variables.newuser = null
-        variables.prevRanking = []
+        variables.newuser = null;
+        variables.prevRanking = [];
         variables.sectionRanking.textContent = "";
-        variables.currentQuestion = 0
-        variables.quiz = null
-        inicio.addQuestions()
-        variables.setUser.users.length !== 0 && variables.elWelcomeScr.appendChild(variables.btn.botonShowMoreResults)
+        variables.currentQuestion = 0;
+        variables.quiz = null;
+        inicio.addQuestions();
+        variables.setUser.users.length !== 0 &&
+            variables.elWelcomeScr.appendChild(variables.btn.botonShowMoreResults);
 
         // quiz.counter = 0;
         // quiz.indexCurrentQuestion = 0;
         if (variables.setUser.users.length === 0) {
-
             // variables.showRanking.classList.add("hidden")
         } else {
             // variables.showRanking.classList.remove("hidden")
-
             // variables.showRanking.classList.add("show");
         }
     },
@@ -83,7 +92,7 @@ const inicio = {
         if (variables.form.input.value !== "") {
             // console.log(variables.form.input.value);
             // variables.newuser = new SetUser(variables.form.input.value);
-            variables.userNamePrev = variables.form.input.value
+            variables.userNamePrev = variables.form.input.value;
             console.log(variables.userNamePrev);
             // let getUser = new GetUsers()
             // getUser.addUsers(user)
@@ -94,125 +103,119 @@ const inicio = {
                 // console.log(variables.newuser.users);
 
                 // elWelcomeScr.style.display = 'none'
-                variables.elWelcomeScr.classList.replace('show', 'hidden');
+                variables.elWelcomeScr.classList.replace("show", "hidden");
                 // variables.elWelcomeScr.textContent = ''
                 // elQuestionScreen.style.display = "block";
 
                 // variables.quiz.showCurrentQuestion();
-                inicio.renderEncuesta()
-                variables.form.input.value = ''
-                    // variables.sectionRanking.textContent = "";
-
-
+                inicio.renderEncuesta();
+                variables.form.input.value = "";
+                // variables.sectionRanking.textContent = "";
             }, 1000);
         }
     },
     resultUsers: function(user, parent) {
         if (user) {
-            const { answers, name, idUsers } = user
+            const { answers, name, idUsers } = user;
 
-            const cardUser = document.createElement('article')
-            cardUser.classList.add('cardUser')
-            const nameTitles = document.createElement('h3')
-            nameTitles.textContent = name
-            cardUser.append(nameTitles)
-                // const 
+            const cardUser = document.createElement("article");
+            cardUser.classList.add("cardUser");
+            const nameTitles = document.createElement("h3");
+            nameTitles.textContent = name;
+            cardUser.append(nameTitles);
+            // const
             answers.forEach((answer) => {
-                    const answers = document.createElement('section')
-                    answers.classList.add('answers')
-                    const titleAnswers = document.createElement('h4')
-                    titleAnswers.innerHTML = `<span class='pregunta'>${variables.titles.pregunta}: </span>${answer.titleAnswers}`
-                    answers.append(titleAnswers)
-                    const responseUser = document.createElement('h4')
-                    responseUser.textContent = answer.Answer
-                    responseUser.innerHTML = `<span class='respuestas'>${variables.titles.respuestas}: </span>${answer.Answer}`
+                const answers = document.createElement("section");
+                answers.classList.add("answers");
+                const titleAnswers = document.createElement("h4");
+                titleAnswers.innerHTML = `<span class='pregunta'>${variables.titles.pregunta}: </span>${answer.titleAnswers}`;
+                answers.append(titleAnswers);
+                const responseUser = document.createElement("h4");
+                responseUser.textContent = answer.Answer;
+                responseUser.innerHTML = `<span class='respuestas'>${variables.titles.respuestas}: </span>${answer.Answer}`;
 
-                    answers.append(responseUser)
+                answers.append(responseUser);
 
-                    cardUser.append(answers)
-                })
-                // result.append(cardUser)
-            return cardUser
-
+                cardUser.append(answers);
+            });
+            // result.append(cardUser)
+            return cardUser;
         }
     },
     renderInit: function() {
         console.log(variables.main);
-        const welcomeScreen = document.createElement('section')
-        welcomeScreen.setAttribute('class', 'welcomeScreen show')
-        variables.elWelcomeScr = welcomeScreen
-        const encuesta = document.createElement('section')
-        encuesta.classList.add('encuesta')
-        encuesta.classList.add('hidden')
-        variables.encuesta = encuesta
-            // creacion title de formulario 
-        const titleEncuesta = document.createElement('h1')
-        titleEncuesta.innerHTML = `${variables.titles.titleEncuesta}`
-        welcomeScreen.appendChild(titleEncuesta)
-            // creacion del suntitle
-        const subTitle = document.createElement('h2')
-        variables.titles.subTitle = `son ${variables.quiz.questions.length} preguntas`
-        subTitle.textContent = variables.titles.subTitle
-        welcomeScreen.appendChild(subTitle)
-            // 
-            // 
-        const form = document.createElement('form')
-        variables.form.selectForm = form
-        form.classList.add('formUser')
-            // creando la seccion de resultados
-        const sectionResultadosUser = document.createElement('section')
-        sectionResultadosUser.setAttribute('class', 'sectionResultadosUser hidden')
-        variables.sectionResultadosUser = sectionResultadosUser
-            // 👉creando el boton de ver mas entradas
-        const botonShowMoreResults = document.createElement('button')
-        botonShowMoreResults.textContent = 'show more results'
-            // console.log(variables.setUser.users.length)
-        botonShowMoreResults.classList.add('btn')
-        const botonShowInit = document.createElement('button')
-        botonShowInit.textContent = 'inicio'
-        botonShowInit.classList.add('btn')
+        const welcomeScreen = document.createElement("section");
+        welcomeScreen.setAttribute("class", "welcomeScreen show");
+        variables.elWelcomeScr = welcomeScreen;
+        const encuesta = document.createElement("section");
+        encuesta.classList.add("encuesta");
+        encuesta.classList.add("hidden");
+        variables.encuesta = encuesta;
+        // creacion title de formulario
+        const titleEncuesta = document.createElement("h1");
+        titleEncuesta.innerHTML = `${variables.titles.titleEncuesta}`;
+        welcomeScreen.appendChild(titleEncuesta);
+        // creacion del suntitle
+        const subTitle = document.createElement("h2");
+        variables.titles.subTitle = `son ${variables.quiz.questions.length} preguntas`;
+        subTitle.textContent = variables.titles.subTitle;
+        welcomeScreen.appendChild(subTitle);
+        //
+        //
+        const form = document.createElement("form");
+        variables.form.selectForm = form;
+        form.classList.add("formUser");
+        form.name = "formulario";
+        // creando la seccion de resultados
+        const sectionResultadosUser = document.createElement("section");
+        sectionResultadosUser.setAttribute("class", "sectionResultadosUser hidden");
+        variables.sectionResultadosUser = sectionResultadosUser;
+        // 👉creando el boton de ver mas entradas
+        const botonShowMoreResults = document.createElement("button");
+        botonShowMoreResults.textContent = "show more results";
+        // console.log(variables.setUser.users.length)
+        botonShowMoreResults.classList.add("btn");
+        const botonShowInit = document.createElement("button");
+        botonShowInit.textContent = "inicio";
+        botonShowInit.classList.add("btn");
 
         // const botonGoInit = document.createElement('button')
-        variables.btn.botonShowInit = botonShowInit
-        variables.btn.botonShowMoreResults = botonShowMoreResults
+        variables.btn.botonShowInit = botonShowInit;
+        variables.btn.botonShowMoreResults = botonShowMoreResults;
 
         // creando el input
-        const input = document.createElement('input')
-        input.setAttribute('type', 'text')
-        input.setAttribute('required', true)
-        input.setAttribute('autocomplete', 'off')
-        input.setAttribute('placeholder', 'username')
-        input.id = 'nameUser'
-        input.name = 'user'
-        variables.form.input = input
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("required", true);
+        input.setAttribute("autocomplete", "off");
+        input.setAttribute("placeholder", "username");
+        input.id = "nameUser";
+        input.name = "user";
+        variables.form.input = input;
 
-        form.append(input)
-        const botonWelcome = document.createElement('button')
-        botonWelcome.setAttribute('type', 'submit')
-        botonWelcome.setAttribute('class', 'quiz__btn')
-        botonWelcome.id = 'welcome_btn'
-        botonWelcome.textContent = 'ok'
-        variables.btn.selectBtn = botonWelcome
-        form.append(botonWelcome)
-            // form.innerHTML = `<input type='text' id='nameUser' name='user' required placeholder='username' autocomplete='off'>
-            // <button id="welcome_btn" class="quiz__btn" type="submit">Ok</button>`
+        form.append(input);
+        const botonWelcome = document.createElement("button");
+        botonWelcome.setAttribute("type", "submit");
+        botonWelcome.setAttribute("class", "quiz__btn");
+        botonWelcome.id = "welcome_btn";
+        botonWelcome.textContent = "ok";
+        variables.btn.selectBtn = botonWelcome;
+        form.append(botonWelcome);
+        // form.innerHTML = `<input type='text' id='nameUser' name='user' required placeholder='username' autocomplete='off'>
+        // <button id="welcome_btn" class="quiz__btn" type="submit">Ok</button>`
 
-
-
-        welcomeScreen.append(form)
-        variables.main.replaceChildren(welcomeScreen)
-        variables.main.appendChild(encuesta)
-        variables.main.appendChild(sectionResultadosUser)
-
-
+        welcomeScreen.append(form);
+        variables.main.replaceChildren(welcomeScreen);
+        variables.main.appendChild(encuesta);
+        variables.main.appendChild(sectionResultadosUser);
     },
     showResult: function(user) {
-        console.log(user, 'USER');
-        const result = document.createElement('section')
-        result.classList.add('result')
-        const title = document.createElement('h2')
-        title.textContent = 'your resultados'
-        result.append(title)
+        console.log(user, "USER");
+        const result = document.createElement("section");
+        result.classList.add("result");
+        const title = document.createElement("h2");
+        title.textContent = "your resultados";
+        result.append(title);
 
         // if (user) {
         //     const { answers, name, idUsers } = user
@@ -221,7 +224,7 @@ const inicio = {
         //     const nameTitles = document.createElement('h3')
         //     nameTitles.textContent = name
         //     cardUser.append(nameTitles)
-        //         // const 
+        //         // const
         //     answers.forEach((answer) => {
         //         const answers = document.createElement('section')
         //         answers.classList.add('answers')
@@ -244,77 +247,83 @@ const inicio = {
         //     // const botonGoInit = document.createElement('button')
         // variables.botonShowInit = botonShowInit
         // variables.botonShowMoreResults = botonShowMoreResults
-        const botonShow = document.createElement('button')
-        botonShow.textContent = 'ver mas resultados'
-        botonShow.classList.add('btn')
-            // variables.btn.botonShowMoreResults = botonShow
-        botonShow.addEventListener('click', () => { inicio.clickBtn('more') }, false)
-        console.log(variables.btn.botonShowMoreResults, variables.setUser.users.length);
-        variables.setUser.users.length > 1 ? result.append(botonShow) : result.append(variables.btn.botonShowInit)
-        result.append(variables.btn.botonShowMoreResults)
-        result.append(inicio.resultUsers(user, result))
-        return result
-
+        const botonShow = document.createElement("button");
+        botonShow.textContent = "ver mas resultados";
+        botonShow.classList.add("btn");
+        // variables.btn.botonShowMoreResults = botonShow
+        botonShow.addEventListener(
+            "click",
+            () => {
+                inicio.clickBtn("more");
+            },
+            false
+        );
+        console.log(
+            variables.btn.botonShowMoreResults,
+            variables.setUser.users.length
+        );
+        variables.setUser.users.length > 1 ?
+            result.append(botonShow) :
+            result.append(variables.btn.botonShowInit);
+        result.append(variables.btn.botonShowMoreResults);
+        result.append(inicio.resultUsers(user, result));
+        return result;
     },
     clickBtn: function(action) {
-
         console.log(action);
         console.log(variables.setUser.users);
-        if (action === 'show') {
+        if (action === "show") {
             // variables.showRanking
-            variables.showRanking.classList.remove('show')
-            variables.showRanking.classList.add('hidden')
+            variables.showRanking.classList.remove("show");
+            variables.showRanking.classList.add("hidden");
 
-            variables.sectionRanking.classList.replace("hidden", 'show');
-
+            variables.sectionRanking.classList.replace("hidden", "show");
 
             variables.setUser.users.map((user) => {
-                const card = document.createElement('articles');
-                card.classList.add('card')
-                const title = document.createElement('h2')
-                title.classList.add('title')
-                title.innerHTML = `${user.name} <span class='counter'>${user.counter}</span>`
-                card.appendChild(title)
+                const card = document.createElement("articles");
+                card.classList.add("card");
+                const title = document.createElement("h2");
+                title.classList.add("title");
+                title.innerHTML = `${user.name} <span class='counter'>${user.counter}</span>`;
+                card.appendChild(title);
                 user.answers.map((answer, i) => {
-                    const anwserTitle = document.createElement('h3')
-                    anwserTitle.classList.add('anwserTitle')
-                    const responseUser = document.createElement('h4')
-                    responseUser.classList.add('responseUser')
+                    const anwserTitle = document.createElement("h3");
+                    anwserTitle.classList.add("anwserTitle");
+                    const responseUser = document.createElement("h4");
+                    responseUser.classList.add("responseUser");
 
-                    anwserTitle.innerHTML = `<span class='span'>Question ${i+1} : </span> ${answer.titleAnswers}`
-                    card.append(anwserTitle)
-                    responseUser.textContent = 'Response: ' + answer.Answer
-                    card.append(responseUser)
-                })
-                variables.sectionRanking.appendChild(card)
-
-            })
-
-        } else if (action === 'inicio') {
+                    anwserTitle.innerHTML = `<span class='span'>Question ${
+            i + 1
+          } : </span> ${answer.titleAnswers}`;
+                    card.append(anwserTitle);
+                    responseUser.textContent = "Response: " + answer.Answer;
+                    card.append(responseUser);
+                });
+                variables.sectionRanking.appendChild(card);
+            });
+        } else if (action === "inicio") {
             // variables.main.replaceChildren()
-            variables.encuesta.classList.replace('show', 'hidden')
-            variables.elWelcomeScr.classList.replace('hidden', 'show')
-                // inicio.renderInit()
-            variables.sectionResultadosUser.classList.replace('show', 'hidden')
-            variables.sectionResultadosUser.textContent = ''
-                // inicio.showInit()
-                // variables.quiz = null
-                // inicio.addQuestions()
-
-        } else if (action === 'more') {
-            console.log('more')
-            variables.sectionResultadosUser.classList.replace('hidden', 'show')
-            const title = document.createElement('h2')
-            title.textContent = 'all responses'
-            variables.sectionResultadosUser.appendChild(title)
-            variables.encuesta.textContent = ''
-            variables.encuesta.classList.replace('show', 'hidden')
-            variables.elWelcomeScr.classList.replace('show', 'hidden')
-            variables.sectionResultadosUser.appendChild(variables.btn.botonShowInit)
+            variables.encuesta.classList.replace("show", "hidden");
+            variables.elWelcomeScr.classList.replace("hidden", "show");
+            // inicio.renderInit()
+            variables.sectionResultadosUser.classList.replace("show", "hidden");
+            variables.sectionResultadosUser.textContent = "";
+            // inicio.showInit()
+            // variables.quiz = null
+            // inicio.addQuestions()
+        } else if (action === "more") {
+            console.log("more");
+            variables.sectionResultadosUser.classList.replace("hidden", "show");
+            const title = document.createElement("h2");
+            title.textContent = "all responses";
+            variables.sectionResultadosUser.appendChild(title);
+            variables.encuesta.textContent = "";
+            variables.encuesta.classList.replace("show", "hidden");
+            variables.elWelcomeScr.classList.replace("show", "hidden");
+            variables.sectionResultadosUser.appendChild(variables.btn.botonShowInit);
             variables.setUser.users.reverse().forEach((user) => {
-
-                variables.sectionResultadosUser.append(inicio.resultUsers(user, null))
-            })
+                variables.sectionResultadosUser.append(inicio.resultUsers(user, null));
+            });
         }
         // variables.newuser.users.length === 0 &&
         //     variables.showRanking.classList.add("show");
@@ -328,61 +337,99 @@ const inicio = {
     },
     addEncuesta: function() {
         const cardQuestion = document.createElement("div");
-        cardQuestion.classList.add('cardQuestion')
-        const titleCardQuestion = document.createElement('h2');
-        cardQuestion.appendChild(titleCardQuestion)
+        cardQuestion.classList.add("cardQuestion");
+        const titleCardQuestion = document.createElement("h2");
+        cardQuestion.appendChild(titleCardQuestion);
 
-        console.log(variables.QuestionScreen)
+        console.log(variables.QuestionScreen);
         console.log(variables.currentQuestion);
-        titleCardQuestion.textContent = variables.quiz.questions[variables.currentQuestion].title
-        const lista = document.createElement('ul')
-        lista.classList.add('lista')
-        variables.quiz.questions[variables.currentQuestion].answers.forEach((answer, i) => {
-            const condition = document.createElement('li')
-            condition.textContent = answer
-            condition.id = i
-            condition.classList.add('item')
-            condition.addEventListener('click', (event) => {
-                console.log(event.target)
-                let prevDataUser = {
-                    titleAnswers: titleCardQuestion.textContent,
-                    AnswerId: parseInt(event.target.id),
-                    Answer: event.target.textContent,
-                    // correctAnswer: this.correctAnswer,
-                    // isCorrect: parseInt(anwserSelected.id) === this.correctAnswer ? true : false,
-                    // counter: this.counter
-                }
-                variables.prevRanking.push(prevDataUser)
-                console.log('VARIABLES', variables.prevRanking);
-                if (variables.quiz.questions[variables.currentQuestion].correctAnswer && variables.quiz.questions[variables.currentQuestion].correctAnswer.includes(parseInt(event.target.id))) {
-                    console.log('si');
-                    variables.currentPrev = variables.currentQuestion
-                    console.log('variables.currentQuestion👉👉', variables.currentPrev)
-                        // console.log(variables.quiz.questions[variables.currentQuestion].conditions)
-                    variables.currentQuestion = variables.quiz.questions[variables.currentQuestion].conditions
-                    variables.quiz.questions[variables.currentQuestion].conditions = true
-                    variables.quiz.questions[variables.currentQuestion].correctAnswer = 'CON'
+        titleCardQuestion.innerHTML =
+            `<span> index ${variables.currentQuestion }</span> ${variables.quiz.questions[variables.currentQuestion].title}`;
+        const lista = document.createElement("ul");
+        lista.classList.add("lista");
+        variables.quiz.questions[variables.currentQuestion].answers.forEach(
+            (answer, i) => {
+                const condition = document.createElement("li");
+                condition.textContent = answer;
+                condition.id = i;
+                condition.classList.add("item");
+                condition.addEventListener(
+                    "click",
+                    (event) => {
+                        // console.log(event.target);
+                        // variables.currentQuestion = variables.currentPrev;
+                        // console.log(variables.currentPrev, '❌❌❌')
+                        let prevDataUser = {
+                            titleAnswers: titleCardQuestion.textContent,
+                            AnswerId: parseInt(event.target.id),
+                            Answer: event.target.textContent,
+                            // correctAnswer: this.correctAnswer,
+                            // isCorrect: parseInt(anwserSelected.id) === this.correctAnswer ? true : false,
+                            // counter: this.counter
+                        };
+                        variables.prevRanking.push(prevDataUser);
+                        console.log("VARIABLES", variables.prevRanking);
 
-                    console.log(variables.currentQuestion);
-                    inicio.renderEncuesta()
-                } else {
-                    console.log('no')
-                    variables.currentQuestion++
-                        inicio.renderEncuesta()
-                }
-                // console.log('HOLA');
-                // setTimeout(() => {}, )
+                        // if (variables.currentPrev !== null) {
+                        //     console.log('currentPrev no es null');
+                        //     variables.currentQuestion = variables.currentPrev++;
 
-            }, false)
-            lista.append(condition)
+                        // }
+                        if (variables.currentPrev) {
+                            console.log(variables.currentPrev, 'CURRENT✅❌');
+                            console.log(variables.currentQuestion, 'CURRENT QUESTION INDEX✅❌a')
+                            variables.currentQuestion
+                            inicio.renderEncuesta();
+                            variables.currentPrev = null
+
+                        }
+                        if (
+                            variables.quiz.questions[variables.currentQuestion]
+                            .correctAnswer &&
+                            variables.quiz.questions[
+                                variables.currentQuestion
+                            ].correctAnswer.includes(parseInt(event.target.id))
+                        ) {
+
+                            console.log("-----------");
+                            console.log(
+                                "si",
+                                variables.quiz.questions[variables.currentQuestion].conditions,
+
+                            );
+                            console.log(variables.quiz.questions[variables.currentQuestion], 'VIENE DEL CLICK');
+                            console.log(
+                                "variables.currentQuestion👉👉",
+                                variables.currentPrev
+                            );
+
+                            console.log(variables.currentQuestion, 'CURRENT INDEX');
+                            console.log(variables.currentQuestion, 'CURRENT INDEX');
+
+                            variables.currentPrev = variables.currentQuestion;
+                            // variables.quiz.questions[variables.currentQuestion].correctAnswer = null
+                            variables.currentQuestion = variables.quiz.questions[variables.currentQuestion].conditions;
+                            variables.quiz.questions[variables.currentQuestion].conditions = true;
+                            console.log(variables.quiz.questions[variables.currentQuestion])
+                            inicio.renderEncuesta();
+
+                        } else {
+                            console.log("no");
+                            variables.currentQuestion++;
+                            inicio.renderEncuesta();
+                        }
+
+                    },
+                    false
+                );
+                lista.append(condition);
                 // variables.QuestionScreen.append(lista)
-        })
-        cardQuestion.appendChild(lista)
+            }
+        );
+        cardQuestion.appendChild(lista);
         return cardQuestion;
     },
     renderEncuesta: () => {
-
-
         // if (variables.quiz.questions[variables.currentQuestion].conditions === null) {
         //     variables.currentQuestion++
         //         inicio.renderEncuesta()
@@ -397,53 +444,111 @@ const inicio = {
         //     }
         // }
         // 👉👉👉
-        const encuesta = variables.encuesta
-        variables.encuesta.classList.replace('hidden', 'show')
-
+        const encuesta = variables.encuesta;
+        variables.encuesta.classList.replace("hidden", "show");
         // variables.encuesta.classList.add = 'block'
 
-        if (variables.currentQuestion !== variables.quiz.questions.length) {
+        if (variables.currentQuestion < variables.quiz.questions.length) {
             // variables.QuestionScreen.replaceChildren(inicio.addEncuesta())
-            encuesta.replaceChildren(inicio.addEncuesta())
-            if (variables.quiz.questions[variables.currentQuestion].conditions === null) {
-                variables.currentQuestion++
-                    inicio.renderEncuesta()
+            encuesta.replaceChildren(inicio.addEncuesta());
+            console.log(variables.quiz.questions[variables.currentQuestion], 'PREGUNTA👊👊👊');
 
-            } else if (variables.quiz.questions[variables.currentQuestion].correctAnswer === 'CON') {
-                console.log('ENTRE A LA CONDICIONAL');
-                variables.quiz.questions[variables.currentQuestion].conditions = null
-                variables.quiz.questions[variables.currentQuestion].correctAnswer = null
-                console.log(variables.quiz.questions[variables.currentQuestion].conditions, 'ES')
-                variables.currentQuestion = variables.currentPrev
+            if (
+                variables.quiz.questions[variables.currentQuestion].conditions === null
+            ) {
+                console.log('✅✅ es condicional')
+                variables.currentQuestion++;
+                inicio.renderEncuesta();
+                // } else if (variables.quiz.questions[variables.currentQuestion].isCondition) {
+                //     console.log(
+                //         "ENTRE A LA CONDICIONAL",
+                //         variables.currentPrev,
+                //         variables.quiz.questions[variables.currentQuestion]
+                //     );
+                //     console.log(
+                //         variables.quiz.questions[variables.currentQuestion].conditions,
+                //         "ES"
+                //     );
+
+                //     // variables.quiz.questions[variables.currentQuestion].conditions = null;
+                //     // variables.quiz.questions[variables.currentQuestion].correctAnswer = null
+                //     console.log(
+                //         variables.quiz.questions[variables.currentQuestion].conditions,
+                //         "ES"
+                //     );
+                //     console.log(variables.quiz.questions[variables.currentQuestion]);
+                //     variables.currentQuestion = variables.currentPrev;
+                //     inicio.renderEncuesta()
+                // }
+                // else if (variables.quiz.questions[variables.currentQuestion].isCondition) {
+                //     console.log('ENTRE A LA CONDICIONAL', variables.currentPrev, variables.quiz.questions[variables.currentQuestion]);
+                //     console.log(variables.quiz.questions[variables.currentQuestion].conditions, 'ES')
+
+                //     variables.quiz.questions[variables.currentQuestion].conditions = null
+                //         // variables.quiz.questions[variables.currentQuestion].correctAnswer = null
+                //     console.log(variables.quiz.questions[variables.currentQuestion].conditions, 'ES')
+                //         // inicio.renderEncuesta()
+                //     console.log(variables.quiz.questions[variables.currentQuestion])
+                //     variables.currentQuestion = variables.currentPrev
+                // }
             }
+            if (variables.quiz.questions[variables.currentQuestion].isCondition) {
+                console.log('ENTRO AL CONDICIONAL');
+                console.log('ANTIGUO INDEX', variables.currentPrev)
+                console.log('INDEX', variables.currentQuestion);
+                // inicio.renderEncuesta();
+                variables.quiz.questions[variables.currentQuestion].conditions = null;
+                console.log('INDEX', variables.currentQuestion);
+                // inicio.renderEncuesta();
+                variables.currentQuestion = variables.currentPrev;
+
+                // console.log();
+                // encuesta.replaceChildren(inicio.addEncuesta());
+
+                setTimeout(() => {
+
+                }, 1000)
+
+
+            }
+
+
         } else {
-            console.log('final', variables.prevRanking);
-            variables.newuser = new SetUser(variables.userNamePrev, variables.prevRanking, null);
-            variables.setUser.addUsers(variables.newuser)
-            console.log(variables.newuser)
-            encuesta.replaceChildren(inicio.showResult(variables.newuser))
-            inicio.showInit()
+            console.log("final", variables.prevRanking);
+            variables.newuser = new SetUser(
+                variables.userNamePrev,
+                variables.prevRanking,
+                null
+            );
+            variables.setUser.addUsers(variables.newuser);
+            console.log(variables.newuser);
+            encuesta.replaceChildren(inicio.showResult(variables.newuser));
+            inicio.showInit();
 
             // variables.QuestionScreen.replaceChildren(inicio.showResult(variables.newuser))
-
-
-
         }
 
-    },
 
+    },
     addQuestions: function() {
         // data.flatMap((a) => {
         //     console.log(a)
         // })
-        variables.quiz = new Quiz()
+        variables.quiz = new Quiz();
         data.forEach((answer) => {
-            const question = new Question(answer.title, answer.answers, answer.correctAnswer, answer.conditions)
-            variables.quiz.addQuestion(question)
-        })
-        console.log(variables.quiz.questions, 'answer');
+            const question = new Question(
+                answer.title,
+                answer.answers,
+                answer.correctAnswer,
+                answer.conditions,
+                answer.isCondition
+            );
+            variables.quiz.addQuestion(question);
+        });
+        console.log(variables.quiz.questions, "answer");
     }
-};
+}
+
 inicio.init();
 
 function SetUser(name, answers, counter) {
@@ -468,9 +573,8 @@ function Quiz() {
         this.questions.push(question);
     };
     this.showCurrentQuestion = function() {
-        console.log(this.indexCurrentQuestion, this.questions.length)
-        if (this.indexCurrentQuestion === (this.questions.length)) {
-
+        console.log(this.indexCurrentQuestion, this.questions.length);
+        if (this.indexCurrentQuestion === this.questions.length) {
             elQuestionScreen.classList.add("hidden");
 
             let elCorrectAnswers = document.querySelector("#correctAnswers");
@@ -479,37 +583,38 @@ function Quiz() {
             // elScreenResult.classList.add('block')
             elScreenResult.style.display = "block";
             // console.log(variables.prevRanking)
-            variables.newuser = new SetUser(variables.userNamePrev, variables.prevRanking, variables.quiz.counter);
-            variables.setUser.addUsers(variables.newuser)
-                // console.log(variables.newuser)
+            variables.newuser = new SetUser(
+                variables.userNamePrev,
+                variables.prevRanking,
+                variables.quiz.counter
+            );
+            variables.setUser.addUsers(variables.newuser);
+            // console.log(variables.newuser)
 
             // console.log(variables.newuser)
             setTimeout(() => {
                 elScreenResult.style.display = "none";
                 variables.elWelcomeScr.classList.remove("hidden");
-                inicio.showInit()
+                inicio.showInit();
 
                 variables.quiz.counter = 0;
                 variables.quiz.indexCurrentQuestion = 0;
-
-
-            }, 1000)
+            }, 1000);
         } else {
             // console.log(variables.isCondition)
             // console.log(this.questions[this.indexCurrentQuestion].conditions)
             // variables.isCondition ? this.questions[this.indexCurrentQuestion].getElement() : this.questions[this.indexCurrentQuestion].getElement();
             this.questions[this.indexCurrentQuestion].getElement();
-
         }
-
     };
 }
 
-function Question(title, answers, correctAnswer, conditions) {
+function Question(title, answers, correctAnswer, conditions, isCondition) {
     this.title = title;
     this.answers = answers;
     this.correctAnswer = correctAnswer;
-    this.conditions = conditions
+    this.conditions = conditions;
+    this.isCondition = isCondition;
     this.getBody = function() {
         let body = this.title.toUpperCase() + "\n";
         for (let i = 0; i < this.answers.length; i++) {
@@ -531,10 +636,13 @@ function Question(title, answers, correctAnswer, conditions) {
 
         // } else {
         if (this.correctAnswer) {
-
             let questionNumber = document.createElement("h2");
-            questionNumber.textContent = `Pregunta ${(variables.quiz.indexCurrentQuestion + 1)}/${variables.quiz.questions.length}`;
-            questionNumber.textContent = `Pregunta ${(variables.quiz.indexCurrentQuestion + 1)}/${variables.quiz.questions.length}`;
+            questionNumber.textContent = `Pregunta ${
+        variables.quiz.indexCurrentQuestion + 1
+      }/${variables.quiz.questions.length}`;
+            questionNumber.textContent = `Pregunta ${
+        variables.quiz.indexCurrentQuestion + 1
+      }/${variables.quiz.questions.length}`;
             elQuestionScreen.append(questionNumber);
             let questionTitle = document.createElement("h3");
             questionTitle.textContent = this.title;
@@ -556,7 +664,6 @@ function Question(title, answers, correctAnswer, conditions) {
         } else {
             // variables.quiz.indexCurrentQuestion += 1
             variables.quiz.showCurrentQuestion();
-
         }
         // } else {
         // }
@@ -570,10 +677,13 @@ function Question(title, answers, correctAnswer, conditions) {
 
         // console.log(this.correctAnswer.includes(parseInt(anwserSelected.id)))
         let nextAnswer = false;
-        if (this.correctAnswer !== null && this.correctAnswer.includes(parseInt(anwserSelected.id))) {
+        if (
+            this.correctAnswer !== null &&
+            this.correctAnswer.includes(parseInt(anwserSelected.id))
+        ) {
             // anwserSelected.classList.add("answer--correct");
-            console.log('VARIABLES', );
-            const array = [this.conditions]
+            console.log("VARIABLES");
+            const array = [this.conditions];
             console.log(this.conditions);
             nextAnswer = true;
             // array[0].getElement()
@@ -582,7 +692,7 @@ function Question(title, answers, correctAnswer, conditions) {
 
             // variables.quiz.counter++;
         } else {
-            nextAnswer = false
+            nextAnswer = false;
             variables.isCondition = false;
 
             // anwserSelected.classList.add("answer--wrong");
@@ -595,9 +705,11 @@ function Question(title, answers, correctAnswer, conditions) {
             // console.log('conteo beefor ', variables.quiz.indexCurrentQuestion);
             console.log(variables.quiz.indexCurrentQuestion);
             // console.log('conteo after ', variables.quiz.indexCurrentQuestion);
-            variables.isCondition ? variables.quiz.indexCurrentQuestion = this.conditions : variables.quiz.indexCurrentQuestion += 1;
+            variables.isCondition ?
+                (variables.quiz.indexCurrentQuestion = this.conditions) :
+                (variables.quiz.indexCurrentQuestion += 1);
             // variables.quiz.indexCurrentQuestion += 1
-            console.log('conteo after ', variables.quiz.indexCurrentQuestion);
+            console.log("conteo after ", variables.quiz.indexCurrentQuestion);
 
             variables.quiz.showCurrentQuestion();
             let prevDataUser = {
@@ -607,17 +719,12 @@ function Question(title, answers, correctAnswer, conditions) {
                 correctAnswer: this.correctAnswer,
                 isCorrect: parseInt(anwserSelected.id) === this.correctAnswer ? true : false,
                 // counter: this.counter
-            }
-            variables.prevRanking.push(prevDataUser)
-            console.log('VARIABLES', variables.prevRanking);
+            };
+            variables.prevRanking.push(prevDataUser);
+            console.log("VARIABLES", variables.prevRanking);
         }, 1000);
     };
 }
-
-
-
-
-
 
 // let elNumberOfQuestions = document.getElementsByClassName("numberOfQuestions")
 let elNumberOfQuestions = document.querySelectorAll(".numberOfQuestions");
