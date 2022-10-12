@@ -28,7 +28,7 @@ const variables = {
 export const metodos = {
     init: function() {
         variables.cuestionario = addCuestionario(questions, variables.cuestionario)
-        console.log(variables.users.users.length)
+        console.log(variables.cuestionario)
         this.renderInit()
         variables.app.form.addEventListener('submit', this.validaForm, false)
         variables.app.btns.goInit.addEventListener('click', () => metodos.clickBtn('init'), false)
@@ -60,20 +60,23 @@ export const metodos = {
         // variables. = document.createElement('section')
         variables.app.form = document.createElement('form')
         variables.app.main.appendChild(variables.app.form)
-        variables.app.form.setAttribute('class', 'main__section__form')
+        variables.app.form.setAttribute('class', 'main__section__form show')
         variables.app.input = `<input type="text" class="main__section__form__input" autocomplete="off" name="username"/>`
         variables.app.btns.btnInit = `<button type="submit" class="main__section__form__btn btn">init</button>`
         variables.app.btns.btnShowResults = document.createElement('button')
         variables.app.btns.btnShowResults.textContent = 'ver otros resultados'
         variables.app.btns.btnShowResults.classList.add('btn')
-        variables.app.form.innerHTML = variables.app.input + variables.app.btns.btnInit
+        variables.app.title = `<h1 class='title'>bienvenido a la encuesta de verificacion</h1>`
+        variables.app.sub_title = `<h2 class='subtitle'> son ${variables.cuestionario.preguntas.length} preguntas condicionales</h2>`
+        variables.app.form.innerHTML = variables.app.title + variables.app.sub_title + variables.app.input + variables.app.btns.btnInit
         variables.app.sectionResultados = document.createElement('section')
         variables.app.sectionResultados.setAttribute('class', 'main__section__resultados hidden')
         variables.app.main.appendChild(variables.app.sectionResultados)
         variables.app.sectionPreguntas = document.createElement('section')
         variables.app.sectionPreguntas.setAttribute('class', 'main__section__preguntas hidden')
         variables.app.main.appendChild(variables.app.sectionPreguntas)
-            // CREANDO BOTONES
+
+        // CREANDO BOTONES
         variables.app.btns.goInit = document.createElement('button')
         variables.app.btns.goInit.setAttribute('class', 'btn')
         variables.app.btns.goInit.textContent = 'ir al inicio'
@@ -92,23 +95,31 @@ export const metodos = {
 
             variables.namePrev = e.target.querySelector('input').value
             console.log(variables.namePrev)
-            variables.app.form.classList.add('hidden')
+            variables.app.form.classList.replace('show', 'hidden')
             variables.app.sectionPreguntas.classList.replace('hidden', 'show')
             e.target.querySelector('input').value = ''
             metodos.renderPreguntas()
-            console.log(variables.preguntaActual);
+                // console.log(variables.preguntaActual);
         }
     },
     renderPreguntas: () => {
         // if(variables.cuestionario.preguntas[variables.preguntaActual].isCondition !== true){
 
         // }
+        console.log(variables.preguntaActual);
         console.log(variables.cuestionario.preguntas[variables.preguntaActual]);
 
-        if (variables.preguntaActual < variables.cuestionario.preguntas.length && variables.cuestionario.preguntas[variables.preguntaActual].isCondition !== true) {
+        if ((variables.preguntaActual !== variables.cuestionario.preguntas.length)) {
 
+            // variables.preguntaActual
+            if (variables.cuestionario.preguntas[variables.preguntaActual].isCondition === false) {
 
-            metodos.renderOpciones()
+                metodos.renderOpciones()
+            } else {
+                variables.preguntaActual++
+                    metodos.renderOpciones()
+
+            }
 
 
 
@@ -156,16 +167,21 @@ export const metodos = {
         } else {
             if (variables.cuestionario.preguntas[variables.preguntaActual].custom) {
                 console.log('CUSTOM🔴')
+                    // variables.cuestionario.preguntas[variables.preguntaPrevia].isCondition = true
                 variables.cuestionario.preguntas[variables.preguntaActual].isCondition = true
 
                 variables.preguntaActual = variables.preguntaPrevia
-                metodos.renderPreguntas()
+                variables.preguntaActual++
+                    metodos.renderPreguntas()
 
 
+            } else {
+
+                console.log('ES NULL❌')
+                console.log(variables.preguntaActual)
+                variables.preguntaActual++
+                    metodos.renderPreguntas()
             }
-            console.log('ES NULL❌')
-            variables.preguntaActual++
-                metodos.renderPreguntas()
 
         }
     },
@@ -174,12 +190,14 @@ export const metodos = {
         const title = document.createElement('h2')
             // title.textContent = variables.users.users.length === 1 ? `tus respuestas ${user.nameUser}` : 'respuestas de otros usuarios'
         title.textContent = `tus respuestas ${user.nameUser}`
+        const contenedorResult = document.createElement('div')
+        contenedorResult.classList.add('div')
 
         variables.app.sectionResultados.appendChild(title)
             // variables.app.sectionResultados.appendChild(variables.users.users.length === 1 ? variables.app.btns.goInit : variables.app.btns.showResultados)
         variables.app.sectionResultados.appendChild(variables.app.btns.goInit)
-
-        variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
+        contenedorResult.appendChild(metodos.renderResultadosUser(user))
+        variables.app.sectionResultados.appendChild(contenedorResult)
             // variables.app.sectionResultados.appendChild(title)
             // variables.app.btns.goInit.
 

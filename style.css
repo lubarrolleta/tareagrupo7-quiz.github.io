@@ -1,205 +1,275 @@
-/* line 1, style.less */
 body {
   background-color: #ffffff;
 }
-/* line 4, style.less */
-.quiz {
+.main {
   cursor: default;
   background-color: #8eecec;
+  min-height: 100vh;
   color: #1d3a42;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-/* line 8, style.less */
-.quiz button.btn {
+.main button.btn {
   background-color: #eecb6e;
+  font-size: larger;
+  text-transform: uppercase;
   color: #ffffff;
   padding: 0.75rem 3rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
-  position: -webkit-sticky;
   position: sticky;
   top: 4px;
 }
-/* line 21, style.less */
-.quiz .hidden {
+.main .hidden {
   opacity: 0;
   display: none;
 }
-/* line 26, style.less */
-.quiz .show {
+.main .show {
   opacity: 1;
-  display: block;
+  display: flex;
 }
-/* line 31, style.less */
-.quiz h2,
-.quiz h1 {
+.main h2,
+.main h1 {
   text-transform: capitalize;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: xx-large;
 }
-/* line 35, style.less */
-.quiz .cardUser {
+.main .cardUser {
   background-color: white;
   padding: 10px;
   border-radius: 9px;
   margin: 10px 0;
 }
-/* line 41, style.less */
-.quiz .cardUser h3 {
+.main .cardUser h3 {
   text-transform: capitalize;
+  font-family: sans-serif;
+  font-size: xx-large;
+  margin-bottom: 5px;
+  padding-left: 10px;
 }
-/* line 45, style.less */
-.quiz .cardUser .answers {
+.main .cardUser .cardPregunta {
   border-top: 2px solid black;
 }
-/* line 48, style.less */
-.quiz .cardUser .answers h4 {
+.main .cardUser .cardPregunta h2,
+.main .cardUser .cardPregunta h3 {
   text-align: start;
   padding: 5px 10px;
+  font-family: sans-serif;
+  line-height: 40px;
 }
-/* line 52, style.less */
-.quiz .cardUser .answers h4 span {
+.main .cardUser .cardPregunta h2 span,
+.main .cardUser .cardPregunta h3 span {
   padding: 5px;
   margin-right: 5px;
-  text-transform: capitalize;
 }
-/* line 57, style.less */
-.quiz .cardUser .answers h4 span.respuestas {
+.main .cardUser .cardPregunta h2 span.titlePregunta,
+.main .cardUser .cardPregunta h3 span.titlePregunta {
   background-color: #5e4630;
   color: white;
 }
-/* line 62, style.less */
-.quiz .cardUser .answers h4 span.pregunta {
+.main .cardUser .cardPregunta h2 span.respuestaUser,
+.main .cardUser .cardPregunta h3 span.respuestaUser {
   background-color: #eecb6e;
 }
-/* line 71, style.less */
-.quiz section.welcomeScreen {
-  -webkit-transition: all 0.3s ease;
+.main__section__form {
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main__section__form h1,
+.main__section__form h2 {
+  text-align: center;
+  font-family: sans-serif;
+}
+.main__section__form input {
+  box-sizing: border-box;
+  width: 250px;
+  outline: none;
+  border: none;
+  padding: 10px;
+  height: 40px;
+  border-radius: 9px;
+  line-height: 40px;
+  font-size: 30px;
+}
+.main__section__resultados {
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+.main__section__resultadosprevios {
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+.main__section__preguntas {
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  padding: 10px;
+}
+.main__section__preguntas article h1 {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: x-large;
+}
+.main__section__preguntas article ul {
+  background-color: white;
+  padding: 10px;
+  list-style: none;
+  border-radius: 9px;
+  max-width: 90%;
+  min-width: 90%;
+}
+.main__section__preguntas article ul li {
+  padding: 10px;
+  font-family: sans-serif;
+  word-wrap: normal;
+  font-weight: bold;
+  font-size: x-large;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.main__section__preguntas article ul li:hover {
+  background-color: gray;
+  color: white;
+  border-radius: 9px;
+}
+.main__section__resultadosprevios {
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+.main__section__resultadosprevios .cardUser {
+  background-color: white;
+  padding: 10px;
+  border-radius: 9px;
+  margin: 10px 0;
+}
+.main__section__resultadosprevios .cardUser h3 {
+  text-transform: capitalize;
+}
+.main__section__resultadosprevios .cardUser .cardPregunta {
+  border-top: 2px solid black;
+}
+.main__section__resultadosprevios .cardUser .cardPregunta h2,
+.main__section__resultadosprevios .cardUser .cardPregunta h3 {
+  text-align: start;
+  padding: 5px 10px;
+  font-family: sans-serif;
+  line-height: 40px;
+}
+.main__section__resultadosprevios .cardUser .cardPregunta h2 span,
+.main__section__resultadosprevios .cardUser .cardPregunta h3 span {
+  padding: 5px;
+  margin-right: 5px;
+}
+.main__section__resultadosprevios .cardUser .cardPregunta h2 span.titlePregunta,
+.main__section__resultadosprevios .cardUser .cardPregunta h3 span.titlePregunta {
+  background-color: #5e4630;
+  color: white;
+}
+.main__section__resultadosprevios .cardUser .cardPregunta h2 span.respuestaUser,
+.main__section__resultadosprevios .cardUser .cardPregunta h3 span.respuestaUser {
+  background-color: #eecb6e;
+}
+.main section.welcomeScreen {
   transition: all 0.3s ease;
 }
-/* line 74, style.less */
-.quiz section.welcomeScreen .formUser {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.main section.welcomeScreen .formUser {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
-/* line 79, style.less */
-.quiz section.welcomeScreen .formUser #nameUser {
+.main section.welcomeScreen .formUser #nameUser {
   font-size: 25px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
 }
-/* line 94, style.less */
-.quiz section.welcomeScreen .quiz__btn__showRanking {
-  -webkit-transition: all 0.5s ease;
+.main section.welcomeScreen .quiz__btn__showRanking {
   transition: all 0.5s ease;
 }
-/* line 113, style.less */
-.quiz section.encuesta .cardQuestion .lista {
+.main section.encuesta .cardQuestion .lista {
   list-style: none;
   background-color: white;
   padding: 10px;
 }
-/* line 118, style.less */
-.quiz section.encuesta .cardQuestion .lista .item {
+.main section.encuesta .cardQuestion .lista .item {
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid #5e4630;
 }
-/* line 123, style.less */
-.quiz section.encuesta .cardQuestion .lista .item:last-child {
+.main section.encuesta .cardQuestion .lista .item:last-child {
   border-bottom: none;
 }
-/* line 127, style.less */
-.quiz section.encuesta .cardQuestion .lista .item:hover {
+.main section.encuesta .cardQuestion .lista .item:hover {
   background-color: #abecf5;
   color: #ceb889;
   font-size: 25px;
 }
-/* line 147, style.less */
-.quiz section.sectionResultadosUser .cardUser {
+.main section.sectionResultadosUser .cardUser {
   background-color: white;
   padding: 10px;
   border-radius: 9px;
 }
-/* line 152, style.less */
-.quiz section.sectionResultadosUser .cardUser h3 {
+.main section.sectionResultadosUser .cardUser h3 {
   text-transform: capitalize;
 }
-/* line 156, style.less */
-.quiz section.sectionResultadosUser .cardUser .answers {
+.main section.sectionResultadosUser .cardUser .answers {
   border-top: 2px solid black;
 }
-/* line 162, style.less */
-.quiz #respuestasUsers {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+.main #respuestasUsers {
+  box-sizing: border-box;
   padding: 10px;
   width: 100%;
 }
-/* line 167, style.less */
-.quiz #respuestasUsers articles.card {
+.main #respuestasUsers articles.card {
   background-color: white;
   border-radius: 9px;
   padding: 10px;
 }
-/* line 172, style.less */
-.quiz #respuestasUsers articles.card .title,
-.quiz #respuestasUsers articles.card .responseUser {
+.main #respuestasUsers articles.card .title,
+.main #respuestasUsers articles.card .responseUser {
   border-bottom: 1px solid #6d1fa1;
   margin-bottom: 10px;
 }
-/* line 179, style.less */
-.quiz #respuestasUsers articles.card .anwserTitle span {
+.main #respuestasUsers articles.card .anwserTitle span {
   padding: 5px 0px 5px 5px;
   background-color: #eecb6e;
   border-radius: 8px;
 }
-/* line 186, style.less */
-.quiz #respuestasUsers articles.card h2.title {
+.main #respuestasUsers articles.card h2.title {
   text-transform: uppercase;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   color: red;
   margin: 5px;
   padding: 10px;
 }
-/* line 193, style.less */
-.quiz #respuestasUsers articles.card h2.title span {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+.main #respuestasUsers articles.card h2.title span {
+  box-sizing: border-box;
   padding: 5px;
   background-color: #77de6f;
   border-radius: 8px;
   color: white;
 }
-/* line 203, style.less */
-.quiz #respuestasUsers articles.card:last-child {
+.main #respuestasUsers articles.card:last-child {
   border-bottom: none;
 }
-/* line 208, style.less */
-.quiz #respuestasUsers.show {
+.main #respuestasUsers.show {
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   width: 100%;
 }
 @media screen and (min-width: 300px) {
-  /* line 217, style.less */
   h1 {
     width: 80%;
     margin: auto;
   }
 }
-/*# sourceMappingURL=style.css.map */
