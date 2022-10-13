@@ -555,21 +555,4 @@ export let questions = [
         ],
         isCondition: false
     },
-
-    /* question 20*/
-    {
-        title: "¿Qué excusas ha recibido por parte del personal cuando pregunta sobre posibles cambios o devoluciones?",
-        condiciones: [{
-            title: "No se",
-            condition: null //lleva al index de la pregunta
-        },
-
-            {
-                title: "No se puede",
-                condition: null //lleva al index de la pregunta
-
-            },
-        ],
-        isCondition: false
-    },
 ]
