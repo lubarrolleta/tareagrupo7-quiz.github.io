@@ -1,275 +1,319 @@
 body {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
+
 .main {
-  cursor: default;
-  background-color: #8eecec;
-  min-height: 100vh;
-  color: #1d3a42;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    cursor: default;
+    background-color: #8eecec;
+    min-height: 100vh;
+    color: #1d3a42;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .main button.btn {
-  background-color: #eecb6e;
-  font-size: larger;
-  text-transform: uppercase;
-  color: #ffffff;
-  padding: 0.75rem 3rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  position: sticky;
-  top: 4px;
+    background-color: #eecb6e;
+    font-size: larger;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 0.75rem 3rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    position: sticky;
+    top: 4px;
 }
+
 .main .hidden {
-  opacity: 0;
-  display: none;
+    opacity: 0;
+    display: none;
 }
+
 .main .show {
-  opacity: 1;
-  display: flex;
+    opacity: 1;
+    display: flex;
 }
+
 .main h2,
 .main h1 {
-  text-transform: capitalize;
-  align-items: center;
-  font-family: sans-serif;
-  font-size: xx-large;
+    text-transform: capitalize;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: xx-large;
 }
+
 .main .cardUser {
-  background-color: white;
-  padding: 10px;
-  border-radius: 9px;
-  margin: 10px 0;
+    background-color: white;
+    padding: 10px;
+    border-radius: 9px;
+    margin: 10px 0;
 }
+
 .main .cardUser h3 {
-  text-transform: capitalize;
-  font-family: sans-serif;
-  font-size: xx-large;
-  margin-bottom: 5px;
-  padding-left: 10px;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    font-size: xx-large;
+    margin-bottom: 5px;
+    padding-left: 10px;
 }
+
 .main .cardUser .cardPregunta {
-  border-top: 2px solid black;
+    border-top: 2px solid black;
 }
+
 .main .cardUser .cardPregunta h2,
 .main .cardUser .cardPregunta h3 {
-  text-align: start;
-  padding: 5px 10px;
-  font-family: sans-serif;
-  line-height: 40px;
+    text-align: start;
+    padding: 5px 10px;
+    font-family: sans-serif;
+    line-height: 40px;
 }
+
 .main .cardUser .cardPregunta h2 span,
 .main .cardUser .cardPregunta h3 span {
-  padding: 5px;
-  margin-right: 5px;
+    padding: 5px;
+    margin-right: 5px;
 }
+
 .main .cardUser .cardPregunta h2 span.titlePregunta,
 .main .cardUser .cardPregunta h3 span.titlePregunta {
-  background-color: #5e4630;
-  color: white;
+    background-color: #5e4630;
+    color: white;
 }
+
 .main .cardUser .cardPregunta h2 span.respuestaUser,
 .main .cardUser .cardPregunta h3 span.respuestaUser {
-  background-color: #eecb6e;
+    background-color: #eecb6e;
 }
+
 .main__section__form {
-  box-sizing: border-box;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .main__section__form h1,
 .main__section__form h2 {
-  text-align: center;
-  font-family: sans-serif;
+    text-align: center;
+    font-family: sans-serif;
 }
+
 .main__section__form input {
-  box-sizing: border-box;
-  width: 250px;
-  outline: none;
-  border: none;
-  padding: 10px;
-  height: 40px;
-  border-radius: 9px;
-  line-height: 40px;
-  font-size: 30px;
+    box-sizing: border-box;
+    width: 250px;
+    outline: none;
+    border: none;
+    padding: 10px;
+    height: 40px;
+    border-radius: 9px;
+    line-height: 40px;
+    font-size: 30px;
 }
+
 .main__section__resultados {
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
 }
+
 .main__section__resultadosprevios {
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
 }
+
 .main__section__preguntas {
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding: 10px;
 }
+
 .main__section__preguntas article h1 {
-  text-align: center;
-  font-family: sans-serif;
-  font-size: x-large;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: x-large;
 }
+
 .main__section__preguntas article ul {
-  background-color: white;
-  padding: 10px;
-  list-style: none;
-  border-radius: 9px;
-  max-width: 90%;
-  min-width: 90%;
+    background-color: white;
+    padding: 10px;
+    list-style: none;
+    border-radius: 9px;
+    max-width: 90%;
+    min-width: 90%;
 }
+
 .main__section__preguntas article ul li {
-  padding: 10px;
-  font-family: sans-serif;
-  word-wrap: normal;
-  font-weight: bold;
-  font-size: x-large;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    padding: 10px;
+    font-family: sans-serif;
+    word-wrap: normal;
+    font-weight: bold;
+    font-size: x-large;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
+
 .main__section__preguntas article ul li:hover {
-  background-color: gray;
-  color: white;
-  border-radius: 9px;
+    background-color: gray;
+    color: white;
+    border-radius: 9px;
 }
+
 .main__section__resultadosprevios {
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
 }
+
 .main__section__resultadosprevios .cardUser {
-  background-color: white;
-  padding: 10px;
-  border-radius: 9px;
-  margin: 10px 0;
+    background-color: white;
+    padding: 10px;
+    border-radius: 9px;
+    margin: 10px 0;
 }
+
 .main__section__resultadosprevios .cardUser h3 {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
+
 .main__section__resultadosprevios .cardUser .cardPregunta {
-  border-top: 2px solid black;
+    border-top: 2px solid black;
 }
+
 .main__section__resultadosprevios .cardUser .cardPregunta h2,
 .main__section__resultadosprevios .cardUser .cardPregunta h3 {
-  text-align: start;
-  padding: 5px 10px;
-  font-family: sans-serif;
-  line-height: 40px;
+    text-align: start;
+    padding: 5px 10px;
+    font-family: sans-serif;
+    line-height: 40px;
 }
+
 .main__section__resultadosprevios .cardUser .cardPregunta h2 span,
 .main__section__resultadosprevios .cardUser .cardPregunta h3 span {
-  padding: 5px;
-  margin-right: 5px;
+    padding: 5px;
+    margin-right: 5px;
 }
+
 .main__section__resultadosprevios .cardUser .cardPregunta h2 span.titlePregunta,
 .main__section__resultadosprevios .cardUser .cardPregunta h3 span.titlePregunta {
-  background-color: #5e4630;
-  color: white;
+    background-color: #5e4630;
+    color: white;
 }
+
 .main__section__resultadosprevios .cardUser .cardPregunta h2 span.respuestaUser,
 .main__section__resultadosprevios .cardUser .cardPregunta h3 span.respuestaUser {
-  background-color: #eecb6e;
+    background-color: #eecb6e;
 }
+
 .main section.welcomeScreen {
-  transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
+
 .main section.welcomeScreen .formUser {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .main section.welcomeScreen .formUser #nameUser {
-  font-size: 25px;
-  box-sizing: border-box;
-  width: 100%;
+    font-size: 25px;
+    box-sizing: border-box;
+    width: 100%;
 }
+
 .main section.welcomeScreen .quiz__btn__showRanking {
-  transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
+
 .main section.encuesta .cardQuestion .lista {
-  list-style: none;
-  background-color: white;
-  padding: 10px;
+    list-style: none;
+    background-color: white;
+    padding: 10px;
 }
+
 .main section.encuesta .cardQuestion .lista .item {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #5e4630;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #5e4630;
 }
+
 .main section.encuesta .cardQuestion .lista .item:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
+
 .main section.encuesta .cardQuestion .lista .item:hover {
-  background-color: #abecf5;
-  color: #ceb889;
-  font-size: 25px;
+    background-color: #abecf5;
+    color: #ceb889;
+    font-size: 25px;
 }
+
 .main section.sectionResultadosUser .cardUser {
-  background-color: white;
-  padding: 10px;
-  border-radius: 9px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 9px;
 }
+
 .main section.sectionResultadosUser .cardUser h3 {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
+
 .main section.sectionResultadosUser .cardUser .answers {
-  border-top: 2px solid black;
+    border-top: 2px solid black;
 }
+
 .main #respuestasUsers {
-  box-sizing: border-box;
-  padding: 10px;
-  width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
 }
+
 .main #respuestasUsers articles.card {
-  background-color: white;
-  border-radius: 9px;
-  padding: 10px;
+    background-color: white;
+    border-radius: 9px;
+    padding: 10px;
+    width: 100%;
 }
+
 .main #respuestasUsers articles.card .title,
 .main #respuestasUsers articles.card .responseUser {
-  border-bottom: 1px solid #6d1fa1;
-  margin-bottom: 10px;
+    border-bottom: 1px solid #6d1fa1;
+    margin-bottom: 10px;
 }
+
 .main #respuestasUsers articles.card .anwserTitle span {
-  padding: 5px 0px 5px 5px;
-  background-color: #eecb6e;
-  border-radius: 8px;
+    padding: 5px 0px 5px 5px;
+    background-color: #eecb6e;
+    border-radius: 8px;
 }
+
 .main #respuestasUsers articles.card h2.title {
-  text-transform: uppercase;
-  box-sizing: border-box;
-  color: red;
-  margin: 5px;
-  padding: 10px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    color: red;
+    margin: 5px;
+    padding: 10px;
 }
+
 .main #respuestasUsers articles.card h2.title span {
-  box-sizing: border-box;
-  padding: 5px;
-  background-color: #77de6f;
-  border-radius: 8px;
-  color: white;
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: #77de6f;
+    border-radius: 8px;
+    color: white;
 }
+
 .main #respuestasUsers articles.card:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
-.main #respuestasUsers.show {
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
+
 @media screen and (min-width: 300px) {
-  h1 {
-    width: 80%;
-    margin: auto;
-  }
+    h1 {
+        width: 80%;
+        margin: auto;
+    }
 }
