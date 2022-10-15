@@ -1,5 +1,6 @@
 import { addCuestionario, GetUsers, SetUser } from "./tareagrupo7-quiz/addCuestionario.js"
 import { questions } from "./tareagrupo7-quiz/questions.js"
+import { getStorageUser, setSesionUser, setStorageUser, setStorageUsers } from "./tareagrupo7-quiz/storage.js"
 const variables = {
     cuestionario: null,
     preguntaActual: 0,
@@ -30,6 +31,7 @@ export const metodos = {
         variables.cuestionario = addCuestionario(questions, variables.cuestionario)
         console.log(variables.cuestionario)
         this.renderInit()
+        this.showIsTrue()
         variables.app.form.addEventListener('submit', this.validaForm, false)
         variables.app.btns.goInit.addEventListener('click', () => metodos.clickBtn('init'), false)
         variables.app.btns.btnShowResults.addEventListener('click', () => metodos.clickBtn('show'), false)
@@ -45,7 +47,13 @@ export const metodos = {
 
         variables.cuestionario = addCuestionario(questions, variables.cuestionario)
         const user = new SetUser(variables.namePrev, variables.dataUserPrev)
+            // GUARDA EN EL LOCAL_STORAGE TODO Y EL STATUS
         variables.users.addUsers(user)
+        setStorageUser(variables.namePrev, user.respuestas, true)
+            // GUARDA EL USER EN LA LISTA DE USERS
+        setStorageUsers(variables.users)
+            // GUARDA ENE L SESION STORAGE 
+        setSesionUser()
         metodos.renderResultadosPrevios(user)
             // metodos.renderResultados(user)
         variables.namePrev = null
@@ -88,6 +96,14 @@ export const metodos = {
         variables.app.sectionResultPrevios.setAttribute('class', 'main__section__resultadosprevios hidden')
         variables.app.main.appendChild(variables.app.sectionResultPrevios)
     },
+    showIsTrue: function() {
+        const dataUser = JSON.parse(getStorageUser())
+        console.log(dataUser)
+        if (dataUser.status) {
+            this.clickBtn('show')
+        }
+
+    },
     validaForm: (e) => {
         e.preventDefault()
             // console.log(e.target.querySelector('input'));
@@ -98,6 +114,7 @@ export const metodos = {
             variables.app.form.classList.replace('show', 'hidden')
             variables.app.sectionPreguntas.classList.replace('hidden', 'show')
             e.target.querySelector('input').value = ''
+            setStorageUser(variables.namePrev, null, false)
             metodos.renderPreguntas()
                 // console.log(variables.preguntaActual);
         }
@@ -154,6 +171,8 @@ export const metodos = {
             respuestaUser: pregunta.textContent
         }
         variables.dataUserPrev.push(prevDataUser)
+            // SETSTORAGE
+        setStorageUser(variables.namePrev, variables.dataUserPrev, false)
         console.log(variables.dataUserPrev);
         if (variables.cuestionario.preguntas[variables.preguntaActual].condiciones[parseInt(pregunta.id)].condition !== null) {
             console.log('NO ES NULL ✅');
