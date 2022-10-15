@@ -1,6 +1,6 @@
 import { addCuestionario, GetUsers, SetUser } from "./tareagrupo7-quiz/addCuestionario.js"
 import { questions } from "./tareagrupo7-quiz/questions.js"
-import { getStorageUser, setSesionUser, setStorageUser, setStorageUsers } from "./tareagrupo7-quiz/storage.js"
+import { getStorageUser, getStorageUsers, setSesionUser, setStorageUser, setStorageUsers } from "./tareagrupo7-quiz/storage.js"
 const variables = {
     cuestionario: null,
     preguntaActual: 0,
@@ -273,7 +273,11 @@ export const metodos = {
             title.textContent = 'respuestas de otros usuarios'
             variables.app.sectionResultados.appendChild(title)
             variables.app.sectionResultados.appendChild(variables.app.btns.goInit)
-            variables.users.users.forEach((user) => {
+            console.log(JSON.parse(getStorageUsers()));
+            variables.users.users.length === 0 ? JSON.parse(getStorageUsers()).users.forEach((user) => {
+                variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
+
+            }) : variables.users.users.forEach((user) => {
                 variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
 
             })
