@@ -136,11 +136,7 @@ export const metodos = {
         e.preventDefault()
             // console.log(e.target.querySelector('input'));
         if (e.target.querySelector('input').value !== '') {
-		 if(JSON.parse(getStorageUsers())?.users.some(user => user.nameUser === e.target.querySelector('input').value)){
-                metodos.clickBtn('showUser')
-            }else{
 
-            
             variables.namePrev = e.target.querySelector('input').value
             console.log(variables.namePrev)
             variables.app.form.classList.replace('show', 'hidden')
@@ -149,7 +145,6 @@ export const metodos = {
             setStorageUser(variables.namePrev, [], false)
             metodos.renderPreguntas()
                 // console.log(variables.preguntaActual);
-}
         }
     },
     renderPreguntas: () => {
