@@ -1,6 +1,6 @@
 import { addCuestionario, GetUsers, SetUser } from "./tareagrupo7-quiz/addCuestionario.js"
 import { questions } from "./tareagrupo7-quiz/questions.js"
-import { getStorageUser, getStorageUsers, setSesionUser, setStorageUser, setStorageUsers } from "./tareagrupo7-quiz/storage.js"
+import { getSesionUser, getStorageUser, getStorageUsers, setSesionUser, setStorageUser, setStorageUsers } from "./tareagrupo7-quiz/storage.js"
 const variables = {
     cuestionario: null,
     preguntaActual: 0,
@@ -32,6 +32,12 @@ export const metodos = {
         console.log(variables.cuestionario)
         this.renderInit()
         this.showIsTrue()
+            // lleno el array users con lo almacenado en el localStorage
+        JSON.parse(getStorageUsers())?.users?.forEach((user) => {
+                console.log(user, 'user✅✅');
+                variables.users.addUsers(user)
+            })
+            // defino eventos
         variables.app.form.addEventListener('submit', this.validaForm, false)
         variables.app.btns.goInit.addEventListener('click', () => metodos.clickBtn('init'), false)
         variables.app.btns.btnShowResults.addEventListener('click', () => metodos.clickBtn('show'), false)
@@ -86,7 +92,7 @@ export const metodos = {
 
         // CREANDO BOTONES
         variables.app.btns.goInit = document.createElement('button')
-        variables.app.btns.goInit.setAttribute('class', 'btn')
+        variables.app.btns.goInit.setAttribute('class', ' btn')
         variables.app.btns.goInit.textContent = 'ir al inicio'
         variables.app.btns.showResultados = document.createElement('button')
         variables.app.btns.showResultados.setAttribute('class', 'btn')
@@ -97,10 +103,13 @@ export const metodos = {
         variables.app.main.appendChild(variables.app.sectionResultPrevios)
     },
     showIsTrue: function() {
-        const dataUser = JSON.parse(getStorageUser())
+        const dataUser = JSON.parse(getSesionUser())
         console.log(dataUser)
-        if (dataUser.status) {
-            this.clickBtn('show')
+        if (dataUser?.status) {
+            this.clickBtn('showUser')
+        } else {
+            // this.clickBtn('init')
+            console.log('USER existe')
         }
 
     },
@@ -273,15 +282,35 @@ export const metodos = {
             title.textContent = 'respuestas de otros usuarios'
             variables.app.sectionResultados.appendChild(title)
             variables.app.sectionResultados.appendChild(variables.app.btns.goInit)
-            console.log(JSON.parse(getStorageUsers()));
-            variables.users.users.length === 0 ? JSON.parse(getStorageUsers()).users.forEach((user) => {
-                variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
+                // console.log(JSON.parse(getStorageUsers()));
+            variables.users.users.length === 0 ? JSON.parse(getStorageUsers())?.users?.forEach((user) => {
+                    variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
 
-            }) : variables.users.users.forEach((user) => {
-                variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
+                }) :
+                variables.users.users.forEach((user) => {
+                    variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
 
-            })
+                })
 
+        }
+        if (action === 'showUser') {
+            // variables.app.sectionResultados.classList.replace('hidden', 'show')
+            variables.app.form.classList.replace('show', 'hidden')
+                // variables.app.sectionResultPrevios.classList.replace('show', 'hidden')
+                // variables.app.sectionResultPrevios.textContent = ''
+            const title = document.createElement('h2')
+            title.textContent = 'Tus respuestas'
+            variables.app.sectionResultPrevios.appendChild(title)
+                // variables.app.sectionResultados.appendChild(variables.app.btns.goInit)
+            this.renderResultadosPrevios(JSON.parse(getSesionUser()))
+                // console.log(JSON.parse(getStorageUsers()));
+                // variables.users.users.length === 0 ? JSON.parse(getStorageUsers())?.users?.forEach((user) => {
+                //     variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
+
+            // }) : variables.users.users.forEach((user) => {
+            //     variables.app.sectionResultados.appendChild(metodos.renderResultadosUser(user))
+
+            // })
         }
     }
 }

@@ -4,10 +4,10 @@ export function setStorageUser(user, data, isTerminado) {
     let respuestasUser = []
     if (!dataUser) {
 
-        localStorage.setItem('USER', JSON.stringify({ name: user, status: isTerminado }))
+        localStorage.setItem('USER', JSON.stringify({ nameUser: user, status: isTerminado }))
     } else {
         // respuestasUser.push(data)
-        localStorage.setItem('USER', JSON.stringify({ name: user, status: isTerminado, respuestasUser: data }))
+        localStorage.setItem('USER', JSON.stringify({ nameUser: user, status: isTerminado, respuestas: data }))
     }
 
 }
