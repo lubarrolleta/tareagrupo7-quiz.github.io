@@ -103,13 +103,21 @@ export const metodos = {
         variables.app.main.appendChild(variables.app.sectionResultPrevios)
     },
     showIsTrue: function() {
-        const dataUser = JSON.parse(getSesionUser())
+        const dataUser = JSON.parse(getSesionUser()) || JSON.parse(getStorageUser())
         console.log(dataUser)
         if (dataUser?.status) {
             this.clickBtn('showUser')
         } else {
             // this.clickBtn('init')
             console.log('USER existe')
+            variables.namePrev = dataUser?.nameUser
+		
+            variables.preguntaActual = dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))
+variables.app.form.classList.replace('show', 'hidden')
+variables.app.sectionPreguntas.classList.replace('hidden', 'show')
+            //console.log(dataUser?.respuestas[dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))])
+		console.log(dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1)))
+                this.renderPreguntas()
         }
 
     },
