@@ -6,7 +6,7 @@ const variables = {
     preguntaActual: 0,
     preguntaPrevia: null,
     namePrev: null,
-    dataUserPrev: [],
+    dataUserPrev: JSON.parse(getStorageUser())?.respuestas || [],
     users: new GetUsers(),
     app: {
         main: document.querySelector('.main'),
@@ -105,26 +105,29 @@ export const metodos = {
         variables.app.main.appendChild(variables.app.sectionResultPrevios)
     },
     showIsTrue: function() {
+	//setStorageUser(null,[],false)
         const dataUser = JSON.parse(getSesionUser()) || JSON.parse(getStorageUser())
         console.log(dataUser)
-        if (dataUser?.status) {
+        if (dataUser !== null && dataUser?.status) {
             this.clickBtn('showUser')
         } else {
             // this.clickBtn('init')
             console.log('USER existe')
-            if (dataUser?.preguntas?.length > 0) {
-
+            if (dataUser !== null && dataUser?.respuestas?.length !== 0) {
+                console.log(dataUser?.respuestas?.length)
                 variables.namePrev = dataUser?.nameUser
                     // if()
                 variables.preguntaActual = dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))
-                variables.app.form.classList.replace('show', 'hidden')
+                variables.preguntaActual++
+                    variables.app.form.classList.replace('show', 'hidden')
                 variables.app.sectionPreguntas.classList.replace('hidden', 'show')
                     //console.log(dataUser?.respuestas[dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))])
-                //console.log(dataUser ? .respuestas ? .indexOf(dataUser ? .respuestas ? .at(-1)))
+                    //console.log(dataUser?.respuestas ? .indexOf(dataUser ? .respuestas ? .at(-1)))
                 this.renderPreguntas()
             } else {
-console.log(document.form.username)
-                document.form.username.value = dataUser?.nameUser
+                console.log(document.form.username)
+                console.log(dataUser?.respuestas?.length)
+                document.form.username.value = dataUser?.nameUser || ''
             }
         }
 
@@ -197,6 +200,7 @@ console.log(document.form.username)
         }
         variables.dataUserPrev.push(prevDataUser)
             // SETSTORAGE
+	console.log(JSON.parse(getStorageUser()))
         setStorageUser(variables.namePrev, variables.dataUserPrev, false)
         console.log(variables.dataUserPrev);
         if (variables.cuestionario.preguntas[variables.preguntaActual].condiciones[parseInt(pregunta.id)].condition !== null) {
