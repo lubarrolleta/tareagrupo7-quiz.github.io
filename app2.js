@@ -75,6 +75,8 @@ export const metodos = {
         variables.app.form = document.createElement('form')
         variables.app.main.appendChild(variables.app.form)
         variables.app.form.setAttribute('class', 'main__section__form show')
+        variables.app.form.setAttribute('name', 'form')
+
         variables.app.input = `<input type="text" class="main__section__form__input" autocomplete="off" name="username"/>`
         variables.app.btns.btnInit = `<button type="submit" class="main__section__form__btn btn">init</button>`
         variables.app.btns.btnShowResults = document.createElement('button')
@@ -110,14 +112,20 @@ export const metodos = {
         } else {
             // this.clickBtn('init')
             console.log('USER existe')
-            variables.namePrev = dataUser?.nameUser
-		
-            variables.preguntaActual = dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))
-variables.app.form.classList.replace('show', 'hidden')
-variables.app.sectionPreguntas.classList.replace('hidden', 'show')
-            //console.log(dataUser?.respuestas[dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))])
-		console.log(dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1)))
+            if (dataUser?.preguntas?.length > 0) {
+
+                variables.namePrev = dataUser?.nameUser
+                    // if()
+                variables.preguntaActual = dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))
+                variables.app.form.classList.replace('show', 'hidden')
+                variables.app.sectionPreguntas.classList.replace('hidden', 'show')
+                    //console.log(dataUser?.respuestas[dataUser?.respuestas?.indexOf(dataUser?.respuestas?.at(-1))])
+                //console.log(dataUser ? .respuestas ? .indexOf(dataUser ? .respuestas ? .at(-1)))
                 this.renderPreguntas()
+            } else {
+console.log(document.form.username)
+                document.form.username.value = dataUser?.nameUser
+            }
         }
 
     },
