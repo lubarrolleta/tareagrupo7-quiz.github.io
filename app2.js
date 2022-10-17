@@ -58,7 +58,7 @@ export const metodos = {
         setStorageUser(variables.namePrev, user.respuestas, true)
             // GUARDA EL USER EN LA LISTA DE USERS
         setStorageUsers(variables.users)
-            // GUARDA ENE L SESION STORAGE 
+            // GUARDA ENE L SESION STORAGE
         setSesionUser()
         metodos.renderResultadosPrevios(user)
             // metodos.renderResultados(user)
@@ -174,16 +174,23 @@ console.log(document.form.username)
         console.log(variables.cuestionario.preguntas[variables.preguntaActual].title)
         const title = document.createElement('h1')
         title.innerHTML = variables.cuestionario.preguntas[variables.preguntaActual].title
+        const container_title = document.createElement('div')
         const card = document.createElement('article')
-        card.appendChild(title)
+        card.appendChild(container_title)
+        container_title.appendChild(title)
+        container_title.classList.add('container__title')
         const lista = document.createElement('ul')
+        lista.classList.add('choices-container')
         variables.cuestionario.preguntas[variables.preguntaActual].condiciones.forEach((answer, i) => {
             const pregunta = document.createElement("li")
             pregunta.classList.add('pregunta')
+            const opcion = document.createElement('span')
+            opcion.classList.add('choice-prefix')
             pregunta.id = i
             pregunta.addEventListener('click', (e) => metodos.clickPregunta(e, title.textContent), false)
             pregunta.textContent = answer.title
             lista.appendChild(pregunta)
+            pregunta.appendChild(opcion)
         })
         card.appendChild(lista)
         variables.app.sectionPreguntas.replaceChildren(card)
